@@ -1,0 +1,214 @@
+:root {
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color-scheme: light dark;
+  font-size: 14px;
+
+  --large-space: clamp(4rem, 8vw, 8rem);
+  --medium-space: clamp(2rem, 2vw, 3rem);
+  --small-space: clamp(0.5rem, 0.5vw, 1rem);
+
+  --font-size-x-large: clamp(2rem, 3vw, 7rem);
+  --font-size-large: clamp(1.5rem, 2.5vw, 5rem);
+  --font-size-medium: clamp(1rem, 1vw, 3rem);
+  --font-size-small: clamp(0.5rem, 0.75vw, 2rem);
+
+  --radius-large: clamp(1rem, 4vw, 6rem);
+  --radius-medium: clamp(1rem, 2vw, 3rem);
+  --radius-small: clamp(1rem, 1vw, 2rem);
+  --radius-x-small: clamp(0.5rem, 0.5vw, 1rem);
+
+  --margin-medium: clamp(1.5rem, 3vw, 2rem);
+  --margin-small: clamp(1rem, 2vw, 1rem);
+  --margin-x-small: clamp(0.25rem, 0.5vw, 0.5rem);
+
+  --padding-medium: clamp(1rem, 2vw, 2rem);
+  --padding-small: clamp(0.5rem, 1vw, 1rem);
+  --padding-x-small: clamp(0.1rem, 0.5vw, 0.5rem);
+
+  --border-width-small: clamp(0.1rem, 0.1vw, 0.25rem);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  font-family: inherit;
+}
+
+h1,
+h2,
+body,
+p,
+fieldset,
+input,
+button {
+  padding: 0;
+  margin: 0;
+}
+
+img {
+  max-inline-size: 100%;
+  block-size: auto;
+}
+
+@media screen and (prefers-color-scheme: light) {
+  :root {
+    --primary: rgb(80 91 146);
+    --surface-tint: rgb(80 91 146);
+    --on-primary: rgb(255 255 255);
+    --primary-container: rgb(221 225 255);
+    --on-primary-container: rgb(8 22 75);
+    --secondary: rgb(90 93 114);
+    --on-secondary: rgb(255 255 255);
+    --secondary-container: rgb(223 225 249);
+    --on-secondary-container: rgb(23 27 44);
+    --tertiary: rgb(118 84 110);
+    --on-tertiary: rgb(255 255 255);
+    --tertiary-container: rgb(255 215 242);
+    --on-tertiary-container: rgb(45 18 40);
+    --error: rgb(186 26 26);
+    --on-error: rgb(255 255 255);
+    --error-container: rgb(255 218 214);
+    --on-error-container: rgb(65 0 2);
+    --background: rgb(251 248 255);
+    --on-background: rgb(27 27 33);
+    --surface: rgb(251 248 255);
+    --on-surface: rgb(27 27 33);
+    --surface-variant: rgb(227 225 236);
+    --on-surface-variant: rgb(69 70 79);
+    --outline: rgb(118 118 128);
+    --outline-variant: rgb(198 197 208);
+    --shadow: rgb(0 0 0);
+    --scrim: rgb(0 0 0);
+    --inverse-surface: rgb(48 48 54);
+    --inverse-on-surface: rgb(242 240 247);
+    --inverse-primary: rgb(185 195 255);
+    --primary-fixed: rgb(221 225 255);
+    --on-primary-fixed: rgb(8 22 75);
+    --primary-fixed-dim: rgb(185 195 255);
+    --on-primary-fixed-variant: rgb(56 67 121);
+    --secondary-fixed: rgb(223 225 249);
+    --on-secondary-fixed: rgb(23 27 44);
+    --secondary-fixed-dim: rgb(195 197 221);
+    --on-secondary-fixed-variant: rgb(67 70 89);
+    --tertiary-fixed: rgb(255 215 242);
+    --on-tertiary-fixed: rgb(45 18 40);
+    --tertiary-fixed-dim: rgb(229 186 216);
+    --on-tertiary-fixed-variant: rgb(92 60 85);
+    --surface-dim: rgb(219 217 224);
+    --surface-bright: rgb(251 248 255);
+    --surface-container-lowest: rgb(255 255 255);
+    --surface-container-low: rgb(245 242 250);
+    --surface-container: rgb(239 237 244);
+    --surface-container-high: rgb(233 231 239);
+    --surface-container-highest: rgb(227 225 233);
+  }
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  :root {
+    --primary: rgb(185 195 255);
+    --surface-tint: rgb(185 195 255);
+    --on-primary: rgb(33 44 97);
+    --primary-container: rgb(56 67 121);
+    --on-primary-container: rgb(221 225 255);
+    --secondary: rgb(195 197 221);
+    --on-secondary: rgb(44 47 66);
+    --secondary-container: rgb(67 70 89);
+    --on-secondary-container: rgb(223 225 249);
+    --tertiary: rgb(229 186 216);
+    --on-tertiary: rgb(68 38 62);
+    --tertiary-container: rgb(92 60 85);
+    --on-tertiary-container: rgb(255 215 242);
+    --error: rgb(255 180 171);
+    --on-error: rgb(105 0 5);
+    --error-container: rgb(147 0 10);
+    --on-error-container: rgb(255 218 214);
+    --background: rgb(18 19 24);
+    --on-background: rgb(227 225 233);
+    --surface: rgb(18 19 24);
+    --on-surface: rgb(227 225 233);
+    --surface-variant: rgb(69 70 79);
+    --on-surface-variant: rgb(198 197 208);
+    --outline: rgb(144 144 154);
+    --outline-variant: rgb(69 70 79);
+    --shadow: rgb(0 0 0);
+    --scrim: rgb(0 0 0);
+    --inverse-surface: rgb(227 225 233);
+    --inverse-on-surface: rgb(48 48 54);
+    --inverse-primary: rgb(80 91 146);
+    --primary-fixed: rgb(221 225 255);
+    --on-primary-fixed: rgb(8 22 75);
+    --primary-fixed-dim: rgb(185 195 255);
+    --on-primary-fixed-variant: rgb(56 67 121);
+    --secondary-fixed: rgb(223 225 249);
+    --on-secondary-fixed: rgb(23 27 44);
+    --secondary-fixed-dim: rgb(195 197 221);
+    --on-secondary-fixed-variant: rgb(67 70 89);
+    --tertiary-fixed: rgb(255 215 242);
+    --on-tertiary-fixed: rgb(45 18 40);
+    --tertiary-fixed-dim: rgb(229 186 216);
+    --on-tertiary-fixed-variant: rgb(92 60 85);
+    --surface-dim: rgb(18 19 24);
+    --surface-bright: rgb(56 57 63);
+    --surface-container-lowest: rgb(13 14 19);
+    --surface-container-low: rgb(27 27 33);
+    --surface-container: rgb(31 31 37);
+    --surface-container-high: rgb(41 42 47);
+    --surface-container-highest: rgb(52 52 58);
+  }
+}
+
+body {
+  background-color: var(--surface-container-lowest);
+  color: var(--on-background);
+  font-size: var(--font-size-medium);
+}
+
+h1 {
+  font-size: var(--font-size-x-large);
+}
+
+h2 {
+  font-size: var(--font-size-large);
+}
+
+button {
+  box-shadow: 0 0 0.4rem -0.1rem var(--shadow);
+}
+button:active {
+  box-shadow: none;
+}
+button:hover {
+  cursor: pointer;
+}
+
+dialog::backdrop {
+  background-color: rgb(0 0 0 / 0.6);
+}
+dialog {
+  border: none;
+  background-color: var(--tertiary-container);
+  color: var(--on-tertiary-container);
+  border-radius: var(--radius-small);
+}
+dialog > p {
+  text-align: center;
+  margin-block-end: var(--margin-small);
+}
+dialog > form {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: var(--margin-small);
+}
+
+dialog > form > button {
+  background-color: var(--tertiary);
+  color: var(--on-tertiary);
+  border: none;
+  padding: var(--padding-x-small) var(--padding-small);
+  border-radius: var(--radius-x-small);
+}

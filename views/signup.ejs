@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/main.css" />
+    <link rel="stylesheet" href="/stylesheets/login.css" />
+    <title>Signup</title>
+  </head>
+  <body>
+    <main>
+      <form action="/auth/signup" method="post">
+        <p class="field">
+          <label for="username">Username</label>
+          <input
+            required
+            type="text"
+            id="username"
+            minlength="3"
+            maxlength="35"
+            name="username"
+          />
+        </p>
+        <p class="field">
+          <label for="password">Password</label>
+          <input
+            required
+            type="password"
+            id="password"
+            minlength="8"
+            maxlength="128"
+            name="password"
+          />
+        </p>
+        <p class="field">
+          <label for="confirm_password">Confirm Password</label>
+          <input
+            required
+            type="password"
+            id="confirm_password"
+            minlength="8"
+            maxlength="128"
+            name="confirm_password"
+          />
+        </p>
+        <div class="action-buttons">
+          <button>Signup</button>
+          <a href="/auth/login">I have an account</a>
+        </div>
+        <% if(typeof message!=='undefined'){%>
+        <p class="message">
+          <img src="/images/error.svg" alt="" /><%=message%>
+        </p>
+        <%}%>
+      </form>
+    </main>
+  </body>
+</html>

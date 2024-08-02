@@ -20,6 +20,9 @@
             id="first_name"
             name="first_name"
             value="<%=firstName%>"
+            minlength="1"
+            maxlength="60"
+            pattern="[A-Za-z]{1,60}"
           />
         </p>
         <p class="field">
@@ -30,11 +33,11 @@
             type="text"
             id="last_name"
             name="last_name"
-            minlength="1"
-            maxlength="60"
             value="<%=lastName%>"
-            pattern="[A-Za-z]{1,60}"
           />
+            <!-- minlength="1"
+            maxlength="60"
+            pattern="[A-Za-z]{1,60}" -->
         </p>
         <p class="field">
           <label for="username">Username</label>
@@ -43,28 +46,32 @@
             required
             type="text"
             id="username"
-            minlength="3"
-            maxlength="35"
             name="username"
             value="<%=username%>"
-            pattern="[A-Za-z0-9]{3,35}"
           />
+            <!-- minlength="3"
+            maxlength="35"
+            pattern="[A-Za-z0-9]{3,35}" -->
         </p>
         <p class="field">
           <label for="password">Password</label>
           <input
             required
+            autocomplete="new-password"
             type="password"
             id="password"
             name="password"
             value="<%=password%>"
-            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$"
           />
         </p>
+            <!-- minlength="8"
+            maxlength="128"
+            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,128}$" -->
         <p class="field">
           <label for="password_confirm">Confirm Password</label>
           <input
             required
+            autocomplete="new-password"
             type="password"
             id="password_confirm"
             name="password_confirm"
@@ -75,11 +82,20 @@
           <button>Signup</button>
           <a href="/auth/login">I have an account</a>
         </div>
+        <% if(errors.length!=0){%>
+
         <div class="errors">
-          <% for(const error of errors){%>
-            <div class="error"><%=error.msg%></div>
-          <%}%>
+          <ul>
+            <% for(const error of errors){%>
+              <li class="error">
+                <img src="/images/cross.svg" alt="">
+                <%=error.msg%>
+              </li>
+            <%}%>
+          </ul>
         </div>
+        
+        <%}%>
       </form>
     </main>
   </body>

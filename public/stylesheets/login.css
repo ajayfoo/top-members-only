@@ -3,6 +3,7 @@ main {
   background-color: var(--surface);
   display: grid;
   place-content: center;
+  padding-inline: var(--padding-medium);
 }
 form {
   display: grid;
@@ -14,8 +15,8 @@ form {
 }
 
 .field {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
   gap: var(--margin-medium);
   align-items: center;
 }
@@ -96,4 +97,30 @@ form {
     filter: invert(98%) sepia(4%) saturate(3541%) hue-rotate(296deg)
       brightness(100%) contrast(103%);
   }
+}
+
+.errors {
+  background-color: var(--error-container);
+  color: var(--on-error-container);
+  border-radius: var(--radius-x-small);
+  display: grid;
+  justify-content: center;
+}
+.errors > ul {
+  padding-inline: var(--padding-small);
+  display: flex;
+  flex-direction: column;
+  gap: var(--margin-small);
+}
+.error {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  gap: var(--margin-x-small);
+  max-width: var(--line-width-max-medium);
+}
+.error > img {
+  width: 1.25em;
+  height: 1.25em;
+  align-self: flex-start;
 }

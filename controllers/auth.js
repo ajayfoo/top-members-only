@@ -35,10 +35,11 @@ const renderSignUpPage = (req, res) => {
   console.log("render signup");
   res.render("signup", {
     firstName: "ajay",
-    lastName: "yay",
-    username: "foo" + Math.floor(Math.random() * 1000),
-    password: "!1aAAAAA",
-    passwordConfirm: "!1aAAAAA",
+    lastName: "yay1",
+    // username: "foo" + Math.floor(Math.random() * 1000),
+    username: "1",
+    password: "!1aAAAA",
+    passwordConfirm: "!1aAAAA",
     errors: [],
   });
 };
@@ -59,11 +60,12 @@ const validationMiddlewaresForSignUpFormFields = [
   body("username")
     .trim()
     .isLength({ min: 3, max: 35 })
+    .withMessage("Username must be 3-35 characters long")
     .isAlphanumeric()
     .withMessage("Only alphabets and 0-9 are allowed for username"),
-  ,
   body("password")
     .isLength({ min: 8, max: 128 })
+    .withMessage("Passsword must be 8-128 characters long")
     .isStrongPassword({
       minLowercase: 1,
       minUppercase: 1,
@@ -72,7 +74,7 @@ const validationMiddlewaresForSignUpFormFields = [
       returnScore: false,
     })
     .withMessage(
-      "At least one lowercase alphabet,uppercase alphabet,number and symbol must be present in password"
+      "At least one lowercase and uppercase alphabet, number and symbol must be present in your password"
     ),
   body("password_confirm").custom(
     (value, { req }) => value === req.body.password
@@ -80,10 +82,9 @@ const validationMiddlewaresForSignUpFormFields = [
 ];
 
 const handleValidationErrors = (req, res, next) => {
-  const err = validationResult(req);
-  if (err) {
-    const { errors } = err;
-    console.log(err);
+  const { errors } = validationResult(req);
+  if (errors.length != 0) {
+    console.log(errors);
     const { first_name, last_name, username, password, password_confirm } =
       req.body;
     res.render("signup", {

@@ -191,6 +191,12 @@ const db = {
       );
       return rows[0];
     },
+    insert: (firstName, lastName, username, password) => {
+      return dbPool.query(
+        "INSERT INTO users(first_name,last_name,username,password) VALUES($1,$2,$3,$4)",
+        [firstName, lastName, username, password]
+      );
+    },
   },
 };
 

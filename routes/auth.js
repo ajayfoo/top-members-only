@@ -3,6 +3,7 @@ import {
   renderLoginPage,
   login,
   renderSignUpPage,
+  validationAndSignUpMiddleware,
 } from "../controllers/auth.js";
 
 const router = Router();
@@ -14,5 +15,6 @@ router.post("/login", login, (req, res) => {
 });
 
 router.get("/signup", renderSignUpPage);
+router.post("/signup", validationAndSignUpMiddleware);
 
 export default router;

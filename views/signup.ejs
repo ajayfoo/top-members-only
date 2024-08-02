@@ -5,20 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/stylesheets/main.css" />
     <link rel="stylesheet" href="/stylesheets/login.css" />
+    <script src="/javascripts/signup.js" defer></script>
     <title>Signup</title>
   </head>
   <body>
     <main>
       <form action="/auth/signup" method="post">
         <p class="field">
+          <label for="first_name">First Name</label>
+          <input
+            autocomplete="name"
+            required
+            type="text"
+            id="first_name"
+            name="first_name"
+            value="<%=firstName%>"
+          />
+        </p>
+        <p class="field">
+          <label for="last_name">Last Name</label>
+          <input
+            autocomplete="family-name"
+            required
+            type="text"
+            id="last_name"
+            name="last_name"
+            minlength="1"
+            maxlength="60"
+            value="<%=lastName%>"
+            pattern="[A-Za-z]{1,60}"
+          />
+        </p>
+        <p class="field">
           <label for="username">Username</label>
           <input
+            autocomplete="username"
             required
             type="text"
             id="username"
             minlength="3"
             maxlength="35"
             name="username"
+            value="<%=username%>"
+            pattern="[A-Za-z0-9]{3,35}"
           />
         </p>
         <p class="field">
@@ -27,31 +56,30 @@
             required
             type="password"
             id="password"
-            minlength="8"
-            maxlength="128"
             name="password"
+            value="<%=password%>"
+            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$"
           />
         </p>
         <p class="field">
-          <label for="confirm_password">Confirm Password</label>
+          <label for="password_confirm">Confirm Password</label>
           <input
             required
             type="password"
-            id="confirm_password"
-            minlength="8"
-            maxlength="128"
-            name="confirm_password"
+            id="password_confirm"
+            name="password_confirm"
+            value="<%=passwordConfirm%>"
           />
         </p>
         <div class="action-buttons">
           <button>Signup</button>
           <a href="/auth/login">I have an account</a>
         </div>
-        <% if(typeof message!=='undefined'){%>
-        <p class="message">
-          <img src="/images/error.svg" alt="" /><%=message%>
-        </p>
-        <%}%>
+        <div class="errors">
+          <% for(const error of errors){%>
+            <div class="error"><%=error.msg%></div>
+          <%}%>
+        </div>
       </form>
     </main>
   </body>

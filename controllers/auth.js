@@ -36,10 +36,9 @@ const renderSignUpPage = (req, res) => {
   res.render("signup", {
     firstName: "ajay",
     lastName: "yay1",
-    // username: "foo" + Math.floor(Math.random() * 1000),
-    username: "1",
-    password: "!1aAAAA",
-    passwordConfirm: "!1aAAAA",
+    username: "foo" + Math.floor(Math.random() * 1000),
+    password: "!1aAAAAA",
+    passwordConfirm: "!1aAAAAA",
     errors: [],
   });
 };
@@ -71,14 +70,13 @@ const validationMiddlewaresForSignUpFormFields = [
       minUppercase: 1,
       minNumbers: 1,
       minSymbols: 1,
-      returnScore: false,
     })
     .withMessage(
       "At least one lowercase and uppercase alphabet, number and symbol must be present in your password"
     ),
-  body("password_confirm").custom(
-    (value, { req }) => value === req.body.password
-  ),
+  body("password_confirm")
+    .custom((value, { req }) => value === req.body.password)
+    .withMessage("Confirmation password doesn't match with original password"),
 ];
 
 const handleValidationErrors = (req, res, next) => {

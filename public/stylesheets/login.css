@@ -16,17 +16,8 @@ form {
 
 .field {
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: var(--margin-medium);
+  gap: var(--margin-x-small);
   align-items: center;
-}
-
-@media screen and (max-width: 425px) {
-  .field {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--margin-x-small);
-  }
 }
 
 .field > label {
@@ -42,8 +33,12 @@ form {
   border: 0.1rem solid var(--outline-variant);
 }
 
-.field > input:hover {
+.field > input:hover,
+.field > input:focus {
   border: 0.1rem solid var(--on-surface);
+}
+.field > input:focus {
+  outline: none;
 }
 
 .action-buttons {

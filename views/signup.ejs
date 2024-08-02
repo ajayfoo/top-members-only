@@ -34,10 +34,10 @@
             id="last_name"
             name="last_name"
             value="<%=lastName%>"
-          />
-            <!-- minlength="1"
+            minlength="1"
             maxlength="60"
-            pattern="[A-Za-z]{1,60}" -->
+            pattern="[A-Za-z]{1,60}"
+          />
         </p>
         <p class="field">
           <label for="username">Username</label>
@@ -48,10 +48,10 @@
             id="username"
             name="username"
             value="<%=username%>"
-          />
-            <!-- minlength="3"
+            minlength="3"
             maxlength="35"
-            pattern="[A-Za-z0-9]{3,35}" -->
+            pattern="[A-Za-z0-9]{3,35}"
+          />
         </p>
         <p class="field">
           <label for="password">Password</label>
@@ -62,11 +62,11 @@
             id="password"
             name="password"
             value="<%=password%>"
+            minlength="8"
+            maxlength="128"
+            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,128}$"
           />
         </p>
-            <!-- minlength="8"
-            maxlength="128"
-            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,128}$" -->
         <p class="field">
           <label for="password_confirm">Confirm Password</label>
           <input

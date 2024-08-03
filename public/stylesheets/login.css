@@ -72,6 +72,7 @@ form {
   display: flex;
   align-items: center;
   gap: var(--margin-small);
+  margin-block-start: var(--margin-small);
 }
 
 .message > img {
@@ -80,14 +81,16 @@ form {
 }
 
 @media screen and (prefers-color-scheme: light) {
-  .message > img {
+  .message > img,
+  .error > img {
     filter: invert(4%) sepia(54%) saturate(7355%) hue-rotate(350deg)
       brightness(96%) contrast(104%);
   }
 }
 
 @media screen and (prefers-color-scheme: dark) {
-  .message > img {
+  .message > img,
+  .error > img {
     filter: invert(98%) sepia(4%) saturate(3541%) hue-rotate(296deg)
       brightness(100%) contrast(103%);
   }

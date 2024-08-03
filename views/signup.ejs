@@ -10,34 +10,38 @@
   </head>
   <body>
     <main>
-      <form action="/auth/signup" method="post">
+      <form id="signup-form" novalidate action="/auth/signup" method="post">
         <p class="field">
-          <label for="first_name">First Name</label>
+          <label for="first-name">First Name</label>
           <input
             autocomplete="name"
             required
             type="text"
-            id="first_name"
+            id="first-name"
             name="first_name"
             value="<%=firstName%>"
             minlength="1"
             maxlength="60"
-            pattern="[A-Za-z]{1,60}"
+            pattern="[A-Za-z]+"
+            aria-describedby="first-name-validation-message"
           />
+          <span id="first-name-validation-message" aria-live="polite" class="validation-message"></span>
         </p>
         <p class="field">
-          <label for="last_name">Last Name</label>
+          <label for="last-name">Last Name</label>
           <input
             autocomplete="family-name"
             required
             type="text"
-            id="last_name"
+            id="last-name"
             name="last_name"
             value="<%=lastName%>"
             minlength="1"
             maxlength="60"
-            pattern="[A-Za-z]{1,60}"
+            pattern="[A-Za-z]+"
+            aria-describedby="last-name-validation-message"
           />
+          <span id="last-name-validation-message" aria-live="polite" class="validation-message"></span>
         </p>
         <p class="field">
           <label for="username">Username</label>
@@ -50,8 +54,10 @@
             value="<%=username%>"
             minlength="3"
             maxlength="35"
-            pattern="[A-Za-z0-9]{3,35}"
+            pattern="[A-Za-z0-9]+"
+            aria-describedby="username-validation-message"
           />
+          <span id="username-validation-message" aria-live="polite" class="validation-message"></span>
         </p>
         <p class="field">
           <label for="password">Password</label>
@@ -64,22 +70,28 @@
             value="<%=password%>"
             minlength="8"
             maxlength="128"
-            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,128}$"
+            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+ 
+            
+            aria-describedby="password-validation-message"
           />
+          <span id="password-validation-message" aria-live="polite" class="validation-message"></span>
         </p>
         <p class="field">
-          <label for="password_confirm">Confirm Password</label>
+          <label for="password-confirm">Confirm Password</label>
           <input
             required
             autocomplete="new-password"
             type="password"
-            id="password_confirm"
+            id="password-confirm"
             name="password_confirm"
             value="<%=passwordConfirm%>"
+            aria-describedby="password-confirm-validation-message"
           />
+          <span id="password-confirm-validation-message" aria-live="polite" class="validation-message"></span>
         </p>
         <div class="action-buttons">
-          <button>Signup</button>
+          <button>Sign Up</button>
           <a href="/auth/login">I have an account</a>
         </div>
         <% if(errors.length!=0){%>

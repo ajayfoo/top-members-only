@@ -1,5 +1,5 @@
 main {
-  height: 100vh;
+  min-block-size: 100vh;
   background-color: var(--surface);
   display: grid;
   place-content: center;
@@ -8,7 +8,6 @@ main {
 form {
   display: grid;
   place-content: center;
-  gap: var(--margin-small);
   background-color: var(--surface-container);
   padding: var(--padding-medium);
   border-radius: var(--radius-medium);
@@ -118,4 +117,19 @@ form {
   width: 1.25em;
   height: 1.25em;
   align-self: flex-start;
+}
+
+.validation-message {
+  min-height: var(--margin-medium);
+  font-size: var(--font-size-small);
+  color: var(--error);
+  visibility: hidden;
+  max-width: var(--line-width-max-medium);
+}
+
+.field > input:user-invalid {
+  border-color: var(--error);
+}
+.field > input:user-invalid + .validation-message {
+  visibility: visible;
 }

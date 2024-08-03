@@ -4,6 +4,9 @@ import bcrypt from "bcrypt";
 import "dotenv/config";
 import { db } from "../db.js";
 
+const goToHome = (req, res, next) => {
+  res.redirect("../../");
+};
 const renderLoginPage = (req, res) => {
   res.render("login");
 };
@@ -21,6 +24,8 @@ const login = (req, res, next) => {
   });
   configuredMiddleware(req, res, next);
 };
+
+const loginMiddlewares = [login, goToHome];
 
 const logout = (req, res) => {
   req.logout((err) => {
@@ -111,16 +116,17 @@ const validationAndSignUpMiddleware = [
         parseInt(process.env.BCRYPT_SALT_ROUNDS)
       );
       await db.users.insert(first_name, last_name, username, passwordHash);
-      res.redirect("../..");
+      next();
     } catch (err) {
       next(err);
     }
   },
+  ...loginMiddlewares,
 ];
 
 export {
   renderLoginPage,
-  login,
+  loginMiddlewares,
   logout,
   renderSignUpPage,
   validationAndSignUpMiddleware,

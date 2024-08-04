@@ -11,7 +11,8 @@
 
   --font-size-x-large: clamp(2rem, 3vw, 7rem);
   --font-size-large: clamp(1.5rem, 2.5vw, 5rem);
-  --font-size-mid-large: clamp(1.25rem, 2vw, 2rem);
+  --font-size-mid-large: clamp(1.25rem, 2vw, 4rem);
+  --font-size-low-large: clamp(1.1rem, 1.5vw, 3.25rem);
   --font-size-medium: clamp(1rem, 1vw, 3rem);
   --font-size-small: clamp(0.95rem, 0.75vw, 2rem);
 

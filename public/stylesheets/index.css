@@ -1,0 +1,58 @@
+.main-nav {
+  position: sticky;
+  --blur: 2px;
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+  top: 0;
+  left: 0;
+  right: 0;
+  padding-inline: var(--padding-medium);
+}
+
+.main-nav > ul {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media screen and (max-width: 425px) {
+  .main-nav {
+    top: unset;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  .dropdown {
+    bottom: 100%;
+  }
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+.main-nav > ul > li {
+  position: relative;
+}
+.main-nav li {
+  display: block;
+  cursor: pointer;
+}
+.menu {
+  position: relative;
+}
+.dropdown {
+  visibility: hidden;
+  position: absolute;
+  right: var(--margin-x-small);
+  background-color: var(--surface-container);
+  color: var(--on-surface);
+  padding: var(--padding-small);
+  border-radius: var(--radius-x-small);
+}
+
+li:hover > .dropdown {
+  visibility: visible;
+}

@@ -11,6 +11,7 @@
 
   --font-size-x-large: clamp(2rem, 3vw, 7rem);
   --font-size-large: clamp(1.5rem, 2.5vw, 5rem);
+  --font-size-mid-large: clamp(1.25rem, 2vw, 2rem);
   --font-size-medium: clamp(1rem, 1vw, 3rem);
   --font-size-small: clamp(0.95rem, 0.75vw, 2rem);
 
@@ -26,6 +27,7 @@
   --padding-medium: clamp(1rem, 2vw, 2rem);
   --padding-small: clamp(0.5rem, 1vw, 1rem);
   --padding-x-small: clamp(0.1rem, 0.5vw, 0.5rem);
+  --padding-xx-small: clamp(0.05rem, 0.25vw, 0.25rem);
 
   --border-width-small: clamp(0.1rem, 0.1vw, 0.25rem);
 
@@ -106,6 +108,10 @@ img {
     --surface-container: rgb(239 237 244);
     --surface-container-high: rgb(233 231 239);
     --surface-container-highest: rgb(227 225 233);
+    /* for blurred */
+
+    --surface-container-blurred: rgb(239 237 244 / 0.1);
+    --surface-container-highest-blurred: rgb(227 225 233 / 0.1);
   }
 }
 
@@ -160,6 +166,11 @@ img {
     --surface-container: rgb(31 31 37);
     --surface-container-high: rgb(41 42 47);
     --surface-container-highest: rgb(52 52 58);
+
+    /* for blurred */
+
+    --surface-container-blurred: rgb(31 31 37 / 0.1);
+    --surface-container-highest-blurred: rgb(52 52 58 / 0.1);
   }
 }
 

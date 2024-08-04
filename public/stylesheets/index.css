@@ -167,3 +167,41 @@ ul {
   padding: var(--padding-xx-small) var(--padding-x-small);
   font-size: var(--font-size-small);
 }
+
+dialog {
+  background-color: var(--surface-container-highest);
+  color: var(--on-surface);
+}
+dialog > form {
+  display: flex;
+  flex-direction: column;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--padding-x-small);
+}
+
+.field > label {
+  align-self: flex-start;
+}
+
+.field > input {
+  border: 0.1rem solid var(--outline);
+}
+.field > input,
+.field > textarea {
+  background-color: var(--surface-container);
+  color: var(--on-surface);
+  font-size: inherit;
+  padding: var(--padding-x-small) var(--padding-xx-small);
+  border-radius: var(--radius-x-small);
+}
+
+dialog > form > button {
+  align-self: center;
+  padding: var(--padding-x-small) var(--padding-medium);
+  background-color: var(--primary-container);
+  color: var(--on-primary-container);
+}

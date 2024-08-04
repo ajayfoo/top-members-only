@@ -63,12 +63,8 @@ ul {
   border-radius: var(--radius-x-small);
 }
 
-li:hover > .dropdown {
-  visibility: visible;
-}
-
 .create > button > img,
-.menu > button > img {
+.menu-icon {
   width: 1.5rem;
   height: 1.5rem;
 }
@@ -91,7 +87,11 @@ li:hover > .dropdown {
 
 @media screen and (prefers-color-scheme: light) {
   .create > button > img,
-  .menu > button > img {
+  .menu-icon {
     filter: brightness(0) saturate(100%);
   }
+}
+
+.menu:focus-within > .dropdown {
+  visibility: visible;
 }

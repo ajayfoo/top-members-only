@@ -8,8 +8,8 @@ const createPostForm = createPostDialog.querySelector("form:only-of-type");
 const logoutBtn = document.getElementById("logout-button");
 const logoutConfirmDialog = document.getElementById("logout-confirm-dialog");
 
-const postPost = async (title, description) => {
-  const response = await fetch(location.href, {
+const postPost = (title, description) => {
+  return fetch(location.href, {
     headers: {
       "Content-Type": "application/json",
     },
@@ -19,7 +19,6 @@ const postPost = async (title, description) => {
       description,
     }),
   });
-  return response.ok;
 };
 
 const showPostCreationResult = (done) => {
@@ -45,13 +44,13 @@ createPostForm.addEventListener("submit", async (e) => {
   const descption = descriptionTxt.value;
   try {
     progressDialog.showModal();
-    const done = await postPost(title, descption);
-    if (done) {
+    const response = await postPost(title, descption);
+    if (response.ok) {
       createPostDialog.close();
       createPostForm.reset();
-      addPostElement(title, descption);
+      addPostElement(title, descption, response);
     }
-    showPostCreationResult(done);
+    showPostCreationResult(response.ok);
   } finally {
     progressDialog.close();
   }

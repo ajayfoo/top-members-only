@@ -22,6 +22,26 @@
         <%}%>
       </div>
     </main>
-    <div class="dialogs"><%- include('common_dialogs') %></div>
+    <div class="dialogs">
+      <%- include('common_dialogs') %>
+      <dialog id="join-dialog">
+        <form method="dialog">
+          <section class="field">
+            <label for="passcode">Enter secret passcode to join</label>
+            <input type="text" required id="passcode" name="passcode" />
+          </section>
+          <div class="action-buttons">
+            <button
+              formmethod="post"
+              id="submit-join-form-button"
+              formaction="/join"
+            >
+              Join
+            </button>
+            <button formnovalidate>Cancel</button>
+          </div>
+        </form>
+      </dialog>
+    </div>
   </body>
 </html>

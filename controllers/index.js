@@ -30,4 +30,14 @@ const insertPost = async (req, res) => {
   }
 };
 
-export { render, insertPost };
+const join = async (req, res) => {
+  const { passcode } = req.body;
+  const currentPasscode = await db.passcode.get();
+  if (currentPasscode === passcode) {
+    res.status(200).end();
+  } else {
+    res.status(401).end();
+  }
+};
+
+export { render, insertPost, join };

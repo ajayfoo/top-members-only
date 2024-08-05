@@ -196,6 +196,14 @@ const db = {
         [title, description, userId]
       ),
   },
+  passcode: {
+    get: async () => {
+      const { rows } = await dbPool.query(
+        "SELECT passcode FROM passcodes LIMIT 1"
+      );
+      return rows[0].passcode;
+    },
+  },
   users: {
     getHavingId: async (id) => {
       const { rows } = await dbPool.query("SELECT * FROM users WHERE id=$1", [
@@ -225,6 +233,17 @@ const db = {
         [userId, UNVERIFIED]
       );
       return rows.length === 1;
+    },
+    changeMemberStatusToGeneral: (userId) => {
+      const GENERAL = "GENERAL";
+      return dbPool.query(
+        `
+        UPDATE users SET member_type_id=(
+          SELECT id FROM member_types WHERE name=$1)
+        WHERE id=$2
+        `,
+        [GENERAL, userId]
+      );
     },
   },
 };

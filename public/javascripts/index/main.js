@@ -4,6 +4,10 @@ const titleTxt = document.getElementById("title");
 const descriptionTxt = document.getElementById("description");
 const progressDialog = document.getElementById("progress-dialog");
 const resultDialog = document.getElementById("result-dialog");
+const createPostForm = createPostDialog.querySelector("form:only-of-type");
+const logoutBtn = document.getElementById("logout-button");
+const logoutConfirmDialog = document.getElementById("logout-confirm-dialog");
+
 const postPost = async (title, description) => {
   const response = await fetch(location.href, {
     headers: {
@@ -18,8 +22,6 @@ const postPost = async (title, description) => {
   return response.ok;
 };
 
-const createPostForm = createPostDialog.querySelector("form:only-of-type");
-
 const showPostCreationResult = (done) => {
   const result = resultDialog.querySelector("form>.result");
   if (done) {
@@ -30,15 +32,22 @@ const showPostCreationResult = (done) => {
   resultDialog.showModal();
 };
 
+logoutBtn.addEventListener("click", () => {
+  logoutConfirmDialog.showModal();
+});
+
 createPostForm.addEventListener("submit", async (e) => {
   if (document.activeElement.id !== createPostBtn.id) return;
   e.preventDefault();
+  const title = titleTxt.value;
+  const descption = descriptionTxt.value;
   try {
     progressDialog.showModal();
-    const done = await postPost(titleTxt.value, descriptionTxt.value);
+    const done = await postPost(title, descption);
     if (done) {
       createPostDialog.close();
       createPostForm.reset();
+      addPostElement(title, descption);
     }
     showPostCreationResult(done);
   } finally {
@@ -48,4 +57,3 @@ createPostForm.addEventListener("submit", async (e) => {
 createPostBtn.addEventListener("click", () => {
   createPostDialog.showModal();
 });
-createPostDialog.showModal();

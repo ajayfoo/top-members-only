@@ -13,7 +13,7 @@ const render = async (req, res) => {
   if (isUnverified) {
     res.render("index/unverified", { posts: allPostTitlesAndDescriptions });
   } else {
-    res.render("index", allPosts);
+    res.render("index/verified", { posts: allPosts });
   }
 };
 
@@ -32,8 +32,12 @@ const insertPost = async (req, res) => {
 
 const join = async (req, res) => {
   const { passcode } = req.body;
+  const {
+    passport: { user },
+  } = req.session;
   const currentPasscode = await db.passcode.get();
   if (currentPasscode === passcode) {
+    await db.users.changeMemberStatusToGeneral(user);
     res.status(200).end();
   } else {
     res.status(401).end();

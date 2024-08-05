@@ -37,8 +37,10 @@ logoutBtn.addEventListener("click", () => {
 });
 
 createPostForm.addEventListener("submit", async (e) => {
-  if (document.activeElement.id !== createPostBtn.id) return;
   e.preventDefault();
+  if (document.activeElement.id !== createPostBtn.id) {
+    createPostDialog.close();
+  }
   const title = titleTxt.value;
   const descption = descriptionTxt.value;
   try {

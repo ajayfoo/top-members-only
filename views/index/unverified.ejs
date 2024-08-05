@@ -11,7 +11,7 @@
     <script src="/javascripts/index/unverified.js" defer></script>
   </head>
   <body>
-    <%- include('main_nav') %>
+    <%- include('main_nav',{isVerified:false}) %>
     <main>
       <div class="posts">
         <%for(const post of posts){%>

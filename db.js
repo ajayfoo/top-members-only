@@ -186,7 +186,7 @@ const db = {
     },
     getAll: async () => {
       const { rows } =
-        await dbPool.query(`SELECT username, posted_at, title, description
+        await dbPool.query(`SELECT username, TO_CHAR(posted_at,'DD.MM.YY') AS posted_at, title, description
         FROM posts INNER JOIN users ON user_id=users.id`);
       return rows;
     },

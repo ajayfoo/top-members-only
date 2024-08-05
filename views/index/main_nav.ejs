@@ -13,8 +13,10 @@
         <img class="menu-icon" src="/images/burger.svg" alt="" />
       </button>
       <ul class="dropdown" aria-label="submenu">
-        <button id="join-button" type="button">Join</button>
         <button id="logout-button" type="button">Log out</button>
+        <%if(!isVerified){%>
+        <button id="join-button" type="button">Join</button>
+        <%}%>
       </ul>
     </li>
   </ul>

@@ -7,126 +7,22 @@
     <link rel="stylesheet" href="/stylesheets/main.css" />
     <link rel="stylesheet" href="/stylesheets/index/main.css" />
     <link rel="stylesheet" href="/stylesheets/index/verified.css" />
-    <script src="/javascripts/index.js" defer></script>
+    <script src="/javascripts/index/main.js" defer></script>
   </head>
   <body>
-    <%- include('main_nav') %>
+    <%- include('main_nav',{isVerified:true}) %>
     <main>
       <div class="posts">
+        <%for(const post of posts){%>
         <article class="post">
           <header>
-            <p class="username">Anon</p>
-            <p class="timestamp">17hrs ago</p>
+            <p class="username"><%=post.username%></p>
+            <p class="timestamp"><%=post.posted_at%></p>
           </header>
-          <p class="title">Title of the post</p>
-          <p class="description">
-            Post description describing the post in a more detailed way. Lorem
-            ipsum dolor sit amet, consectetur adipisicing elit. Recusandae animi
-            tempora aliquid adipisci nisi, aut maiores voluptate cupiditate
-            voluptas, aperiam in, mollitia nemo debitis beatae a veniam. Aut,
-            illo maiores odit perferendis dolores fugit accusamus cum, obcaecati
-            molestias ut non deserunt unde tempora debitis rem exercitationem
-            molestiae, quisquam quibusdam. Hic?
-          </p>
+          <p class="title"><%=post.title%></p>
+          <p class="description"><%=post.description%></p>
         </article>
-        <article class="post">
-          <header>
-            <p class="username">Anon</p>
-            <p class="timestamp">17hrs ago</p>
-          </header>
-          <p class="title">Title of the post</p>
-          <p class="description">
-            Post description describing the post in a more detailed way. Lorem
-            ipsum dolor sit amet, consectetur adipisicing elit. Recusandae animi
-            tempora aliquid adipisci nisi, aut maiores voluptate cupiditate
-            voluptas, aperiam in, mollitia nemo debitis beatae a veniam. Aut,
-            illo maiores odit perferendis dolores fugit accusamus cum, obcaecati
-            molestias ut non deserunt unde tempora debitis rem exercitationem
-            molestiae, quisquam quibusdam. Hic?
-          </p>
-        </article>
-        <article class="post">
-          <header>
-            <p class="username">Anon</p>
-            <p class="timestamp">17hrs ago</p>
-          </header>
-          <p class="title">Title of the post</p>
-          <p class="description">
-            Post description describing the post in a more detailed way. Lorem
-            ipsum dolor sit amet, consectetur adipisicing elit. Recusandae animi
-            molestias ut non deserunt unde tempora debitis rem exercitationem
-            molestiae, quisquam quibusdam. Hic?
-          </p>
-        </article>
-        <article class="post">
-          <header>
-            <p class="username">Anon</p>
-            <p class="timestamp">17hrs ago</p>
-          </header>
-          <p class="title">Title of the post</p>
-          <p class="description">
-            Post description describing the post in a more detailed way. Lorem
-            ipsum dolor sit amet, consectetur adipisicing elit. Recusandae animi
-            tempora aliquid adipisci nisi, aut maiores voluptate cupiditate
-            voluptas, aperiam in, mollitia nemo debitis beatae a veniam. Aut,
-            illo maiores odit perferendis dolores fugit accusamus cum, obcaecati
-            molestias ut non deserunt unde tempora debitis rem exercitationem
-            molestiae, quisquam quibusdam. Hic?
-          </p>
-        </article>
-        <article class="post">
-          <header>
-            <p class="username">Anon</p>
-            <p class="timestamp">17hrs ago</p>
-          </header>
-          <p class="title">Title of the post</p>
-          <p class="description">
-            voluptas, aperiam in, mollitia nemo debitis beatae a veniam. Aut,
-            illo maiores odit perferendis dolores fugit accusamus cum, obcaecati
-            molestias ut non deserunt unde tempora debitis rem exercitationem
-            molestiae, quisquam quibusdam. Hic?
-          </p>
-        </article>
-        <article class="post">
-          <header>
-            <p class="username">Anon</p>
-            <p class="timestamp">17hrs ago</p>
-          </header>
-          <p class="title">Title of the post</p>
-          <p class="description">
-            Post description describing the post in a more detailed way. Lorem
-            ipsum dolor sit amet, consectetur adipisicing elit. Recusandae animi
-            tempora aliquid adipisci nisi, aut maiores voluptate cupiditate
-            voluptas, aperiam in, mollitia nemo debitis beatae a veniam. Aut,
-          </p>
-        </article>
-        <article class="post">
-          <header>
-            <p class="username">Anon</p>
-            <p class="timestamp">17hrs ago</p>
-          </header>
-          <p class="title">Title of the post</p>
-          <p class="description">
-            Post description describing the post in a more detailed way. Lorem
-            ipsum dolor sit amet, consectetur adipisicing elit. Recusandae animi
-            tempora aliquid adipisci nisi, aut maiores voluptate cupiditate
-            voluptas, aperiam in, mollitia nemo debitis beatae a veniam. Aut,
-            illo maiores odit perferendis dolores fugit accusamus cum, obcaecati
-            molestias ut non deserunt unde tempora debitis rem exercitationem
-            molestiae, quisquam quibusdam. Hic?
-          </p>
-        </article>
-        <article class="post">
-          <header>
-            <p class="username">Anon</p>
-            <p class="timestamp">17hrs ago</p>
-          </header>
-          <p class="title">Title of the post</p>
-          <p class="description">
-            Post description describing the post in a more detailed way. Lorem
-            ipsum dolor sit amet, consectetur adipisicing elit. Recusandae animi
-          </p>
-        </article>
+        <%}%>
       </div>
     </main>
     <div class="dialogs"><%- include('common_dialogs') %></div>

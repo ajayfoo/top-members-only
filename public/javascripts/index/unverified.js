@@ -33,7 +33,13 @@ const postJoinRequest = async (passcode) => {
     method: "POST",
     body: JSON.stringify({ passcode }),
   });
-  return response.ok;
+  return response;
+};
+
+const showJoinUnsuccessfulMessage = (msg) => {
+  const result = resultDialog.querySelector("form>.result");
+  result.textContent = msg;
+  resultDialog.showModal();
 };
 
 joinButton.addEventListener("click", () => {
@@ -41,12 +47,16 @@ joinButton.addEventListener("click", () => {
 });
 
 joinDialog.addEventListener("submit", async (e) => {
-  if (document.activeElement.id !== submitJoinFormButton.id) return;
   e.preventDefault();
-  const done = await postJoinRequest(passcodeTxt.value);
-  if (done) {
-    console.log("joined");
-  } else {
-    console.log("failed to join");
+  if (document.activeElement.id !== submitJoinFormButton.id) {
+    joinDialog.close();
+  }
+  const response = await postJoinRequest(passcodeTxt.value);
+  if (response.status === 401) {
+    showJoinUnsuccessfulMessage("Wrong passcode");
+  } else if (!response.ok) {
+    showJoinUnsuccessfulMessage("Something went wrong");
+  } else if (response.ok) {
+    location.reload();
   }
 });

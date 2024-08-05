@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MO: Members Only</title>
+    <link rel="stylesheet" href="/stylesheets/main.css" />
+    <link rel="stylesheet" href="/stylesheets/index/main.css" />
+    <link rel="stylesheet" href="/stylesheets/index/unverified.css" />
+    <script src="/javascripts/index.js" defer></script>
+  </head>
+  <body>
+    <%- include('main_nav') %>
+    <main>
+      <div class="posts">
+        <%for(const post of posts){%>
+        <article class="post">
+          <p class="title"><%=post.title%></p>
+          <p class="description"><%=post.description%></p>
+        </article>
+        <%}%>
+      </div>
+    </main>
+    <div class="dialogs"><%- include('common_dialogs') %></div>
+  </body>
+</html>

@@ -177,6 +177,25 @@ const db = {
       return dbPool.query("DELETE FROM instruments WHERE id=$1::int", [id]);
     },
   },
+  posts: {
+    getAllTitlesAndDescriptions: async () => {
+      const { rows } = await dbPool.query(
+        "SELECT title, description FROM posts"
+      );
+      return rows;
+    },
+    getAll: async () => {
+      const { rows } =
+        await dbPool.query(`SELECT username, posted_at, title, description
+        FROM posts INNER JOIN users ON user_id=users.id`);
+      return rows;
+    },
+    insert: (title, description, userId) =>
+      dbPool.query(
+        "INSERT INTO posts(title,description,user_id) VALUES($1,$2,$3)",
+        [title, description, userId]
+      ),
+  },
   users: {
     getHavingId: async (id) => {
       const { rows } = await dbPool.query("SELECT * FROM users WHERE id=$1", [
@@ -196,6 +215,16 @@ const db = {
         "INSERT INTO users(first_name,last_name,username,password) VALUES($1,$2,$3,$4)",
         [firstName, lastName, username, password]
       );
+    },
+    isUnverified: async (userId) => {
+      const UNVERIFIED = "UNVERIFIED";
+      const { rows } = await dbPool.query(
+        `SELECT member_type_id FROM users AS u
+        INNER JOIN member_types AS mtype ON (u.member_type_id=mtype.id
+        AND u.id=$1 AND mtype.name=$2)`,
+        [userId, UNVERIFIED]
+      );
+      return rows.length === 1;
     },
   },
 };

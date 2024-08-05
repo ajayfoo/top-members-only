@@ -1,0 +1,29 @@
+.post > header {
+  border-radius: var(--radius-x-small) var(--radius-x-small) 0 0;
+  display: flex;
+  padding: var(--padding-small);
+  background-color: var(--secondary-container);
+  color: var(--on-secondary-container);
+  justify-content: space-between;
+  align-items: center;
+  margin-block-end: var(--padding-small);
+}
+
+.post {
+  padding-block-end: var(--padding-small);
+}
+.title {
+  padding-inline: var(--padding-small);
+  font-weight: bold;
+}
+
+.post > header > .username {
+  font-size: var(--font-size-low-large);
+}
+.post > header > .timestamp {
+  background-color: var(--secondary);
+  color: var(--on-secondary);
+  border-radius: var(--radius-x-small);
+  padding: var(--padding-xx-small) var(--padding-x-small);
+  font-size: var(--font-size-small);
+}

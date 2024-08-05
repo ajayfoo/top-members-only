@@ -5,31 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MO: Members Only</title>
     <link rel="stylesheet" href="/stylesheets/main.css" />
-    <link rel="stylesheet" href="/stylesheets/index.css" />
+    <link rel="stylesheet" href="/stylesheets/index/main.css" />
+    <link rel="stylesheet" href="/stylesheets/index/verified.css" />
     <script src="/javascripts/index.js" defer></script>
   </head>
   <body>
-    <nav class="main-nav">
-      <ul>
-        <li>
-          <h1>MO</h1>
-        </li>
-        <li class="create">
-          <button aria-label="create post" id="create-post" type="button">
-            <img src="/images/plus.svg" alt="" /> Create
-          </button>
-        </li>
-        <li class="menu">
-          <button type="button">
-            <img class="menu-icon" src="/images/burger.svg" alt="" />
-          </button>
-          <ul class="dropdown" aria-label="submenu">
-            <button type="button">Join</button>
-            <button type="button">Log out</button>
-          </ul>
-        </li>
-      </ul>
-    </nav>
+    <%- include('main_nav') %>
     <main>
       <div class="posts">
         <article class="post">
@@ -148,20 +129,6 @@
         </article>
       </div>
     </main>
-    <div class="dialogs">
-      <dialog id="create-post-dialog">
-        <form method="dialog">
-          <section class="field">
-            <label for="title">Title</label>
-            <input type="text" id="title" />
-          </section>
-          <section class="field">
-            <label for="description">Description</label>
-            <textarea name="description" id="description"></textarea>
-          </section>
-          <button>Post</button>
-        </form>
-      </dialog>
-    </div>
+    <div class="dialogs"><%- include('common_dialogs') %></div>
   </body>
 </html>

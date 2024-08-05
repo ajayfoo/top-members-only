@@ -1,17 +1,16 @@
 import express from "express";
-import { dirname } from "node:path";
-import { fileURLToPath } from "node:url";
 import configuredSession from "./middlewares/session.js";
 import auth from "./middlewares/auth.js";
 import loginRouter from "./routes/auth.js";
 import indexRouter from "./routes/index.js";
 import "dotenv/config";
+import bodyParser from "body-parser";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(express.static("public"));
 app.use(configuredSession);
 app.use(auth.session());

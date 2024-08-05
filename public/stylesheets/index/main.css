@@ -1,0 +1,184 @@
+.main-nav {
+  position: sticky;
+  --blur: 4px;
+  backdrop-filter: blur(var(--blur));
+  -webkit-backdrop-filter: blur(var(--blur));
+  background-color: var(--surface-container-highest-blurred);
+  color: var(--on-surface);
+  top: 0;
+  left: 0;
+  right: 0;
+  padding-inline: var(--padding-small);
+}
+
+.main-nav > ul {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main-nav > ul > li:first-child {
+  padding-inline-start: var(--padding-small);
+}
+.main-nav > ul > li:last-child {
+  padding-inline-end: var(--padding-small);
+}
+@media screen and (max-width: 425px) {
+  .main-nav {
+    top: unset;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  .dropdown {
+    bottom: 100%;
+  }
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+.main-nav > ul > li {
+  position: relative;
+}
+
+.main-nav button {
+  color: inherit;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+}
+.main-nav li {
+  display: block;
+  cursor: pointer;
+}
+.menu {
+  position: relative;
+  border-radius: var(--radius-x-small);
+}
+.dropdown {
+  visibility: hidden;
+  position: absolute;
+  right: 0;
+  background-color: var(--surface-container);
+  color: var(--on-surface);
+  padding: var(--padding-small);
+  border-radius: var(--radius-x-small);
+  display: grid;
+  gap: var(--padding-small);
+  min-width: max-content;
+}
+.dropdown > button {
+  font-size: inherit;
+  padding: var(--padding-x-small) var(--padding-small);
+  border-radius: var(--radius-x-small);
+}
+.create > button > img,
+.menu-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.create > button > img {
+  border: 0.15rem solid var(--on-surface);
+  border-radius: 50%;
+  padding: var(--padding-xx-small);
+}
+
+.create > button {
+  font-size: var(--font-size-mid-large);
+}
+
+.create > button,
+.menu > button {
+  display: flex;
+  align-items: center;
+  gap: var(--margin-x-small);
+}
+
+@media screen and (prefers-color-scheme: light) {
+  .create > button > img,
+  .menu-icon {
+    filter: brightness(0) saturate(100%);
+  }
+}
+
+.menu:focus-within {
+  background-color: var(--surface-container-highest);
+}
+.menu:focus-within > .dropdown {
+  visibility: visible;
+}
+.menu {
+  padding: var(--padding-x-small) var(--padding-small);
+}
+
+.dropdown > button:hover {
+  background-color: var(--surface-container-highest);
+}
+
+.posts {
+  margin: var(--margin-small);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: var(--margin-small);
+}
+
+.post {
+  background-color: var(--surface-container-high);
+  border-radius: var(--radius-x-small);
+  cursor: pointer;
+}
+.description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 10lh;
+  padding-inline: var(--padding-small);
+}
+.post:hover {
+  box-shadow: 0 0 4px 3px var(--shadow);
+}
+
+dialog {
+  background-color: var(--surface-container-highest);
+  color: var(--on-surface);
+}
+dialog > form {
+  display: flex;
+  flex-direction: column;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--padding-x-small);
+}
+
+.field > label {
+  align-self: flex-start;
+}
+
+.field > input {
+  border: 0.1rem solid var(--outline);
+}
+.field > input,
+.field > textarea {
+  background-color: var(--surface-container);
+  color: var(--on-surface);
+  font-size: inherit;
+  padding: var(--padding-x-small) var(--padding-xx-small);
+  border-radius: var(--radius-x-small);
+}
+.action-buttons > button:last-child {
+  margin-inline-start: var(--margin-x-small);
+}
+dialog .action-buttons > button {
+  padding: var(--padding-x-small) var(--padding-medium);
+  background-color: var(--primary-container);
+  color: var(--on-primary-container);
+  border: none;
+  border-radius: var(--radius-x-small);
+}

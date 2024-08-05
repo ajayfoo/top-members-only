@@ -1,0 +1,30 @@
+<dialog id="create-post-dialog">
+  <form method="dialog">
+    <section class="field">
+      <label for="title">Title</label>
+      <input required maxlength="25" type="text" id="title" />
+    </section>
+    <section class="field">
+      <label for="description">Description</label>
+      <textarea
+        required
+        maxlength="360"
+        name="description"
+        id="description"
+      ></textarea>
+    </section>
+    <div class="action-buttons">
+      <button formmethod="post" formaction="/post" id="create-post">
+        Post
+      </button>
+      <button formnovalidate>Close</button>
+    </div>
+  </form>
+</dialog>
+<dialog id="progress-dialog">
+  <form method="dialog">
+    <label for="create-post-progress">Creating your post...</label>
+    <progress id="create-post-progress"></progress>
+    <button>Cancel</button>
+  </form>
+</dialog>

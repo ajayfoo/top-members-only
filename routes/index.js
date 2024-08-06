@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  deletePost,
   render,
   validateAndBecomeAdminMiddlewares,
   validateAndInsertPostMiddlewares,
@@ -12,5 +13,6 @@ router.get("/", render);
 router.post("/", validateAndInsertPostMiddlewares);
 router.post("/join", validateAndJoinMiddlewares);
 router.post("/become-admin", validateAndBecomeAdminMiddlewares);
+router.delete("/", deletePost);
 
 export default router;

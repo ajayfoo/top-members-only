@@ -4,6 +4,7 @@ const joinButton = document.getElementById("join-button");
 const submitJoinFormButton = document.getElementById("submit-join-form-button");
 const passcodeTxt = document.getElementById("passcode");
 const postDetailDialog = document.getElementById("post-detail-dialog");
+const allPostElements = document.querySelectorAll(".post");
 const showPostDetail = (p) => {
   const title = p.querySelector(".title").textContent;
   const description = p.querySelector(".description").textContent;
@@ -54,6 +55,10 @@ const postJoinRequest = async (passcode) => {
   return response;
 };
 
+allPostElements.forEach((p) => {
+  p.addEventListener("click", () => showPostDetail(p));
+});
+
 joinButton.addEventListener("click", () => {
   joinDialog.showModal();
 });
@@ -66,9 +71,9 @@ joinDialog.addEventListener("submit", async (e) => {
   }
   const response = await postJoinRequest(passcodeTxt.value);
   if (response.status === 401) {
-    showJoinUnsuccessfulMessage("Wrong passcode");
+    showMessage("Wrong passcode");
   } else if (!response.ok) {
-    showJoinUnsuccessfulMessage("Something went wrong");
+    showMessage("Something went wrong");
   } else if (response.ok) {
     location.reload();
   }

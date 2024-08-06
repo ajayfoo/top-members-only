@@ -6,6 +6,11 @@ const submitBecomeAdminFormButton = document.getElementById(
 );
 const passcodeTxt = document.getElementById("passcode");
 const postDetailDialog = document.getElementById("post-detail-dialog");
+const allPostElements = document.querySelectorAll(".post");
+const postDeleteForm = postDetailDialog.querySelector("form");
+const deletPostBtn = document.getElementById("delete-post");
+let selectedPostId = null;
+
 const getNewPostElement = async (title, description, response) => {
   const postEle = document.createElement("article");
   postEle.classList.add("post");
@@ -53,13 +58,7 @@ const postBecomeAdminRequest = async (passcode) => {
   return response;
 };
 
-const showPostDetail = (p) => {
-  console.log(p);
-  const username = p.querySelector(".username").textContent;
-  const timestamp = p.querySelector(".timestamp").textContent;
-  const title = p.querySelector(".title").textContent;
-  const description = p.querySelector(".description").textContent;
-
+const showPostDetail = (username, timestamp, title, description) => {
   const postDetailusernameEle = postDetailDialog.querySelector(".username");
   postDetailusernameEle.textContent = username;
 
@@ -75,6 +74,19 @@ const showPostDetail = (p) => {
 
   postDetailDialog.showModal();
 };
+
+allPostElements.forEach((p) => {
+  const username = p.querySelector(".username").textContent;
+  const timestamp = p.querySelector(".timestamp").textContent;
+  const title = p.querySelector(".title").textContent;
+  const description = p.querySelector(".description").textContent;
+  const id = p.dataset.id;
+
+  p.addEventListener("click", () => {
+    showPostDetail(username, timestamp, title, description);
+    selectedPostId = id;
+  });
+});
 becomeAdminButton.addEventListener("click", () => {
   becomeAdminDialog.showModal();
 });
@@ -85,13 +97,34 @@ becomeAdminDialog.addEventListener("submit", async (e) => {
     becomeAdminDialog.close();
     return;
   }
-  console.log("become admin");
   const response = await postBecomeAdminRequest(passcodeTxt.value);
   if (response.status === 401) {
-    showJoinUnsuccessfulMessage("Wrong passcode");
+    showMessage("Wrong passcode");
   } else if (!response.ok) {
-    showJoinUnsuccessfulMessage("Something went wrong");
+    showMessage("Something went wrong");
   } else if (response.ok) {
     location.reload();
+  }
+});
+
+postDeleteForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  if (document.activeElement.id !== deletPostBtn.id) {
+    postDetailDialog.close();
+    return;
+  }
+  progressDialog.showModal();
+  const response = await fetch(location.href, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    method: "DELETE",
+    body: JSON.stringify({ id: selectedPostId }),
+  });
+  if (response.ok) {
+    showMessage("Successfully deleted post");
+    location.reload();
+  } else {
+    showMessage("Failed to delete post");
   }
 });

@@ -180,13 +180,13 @@ const db = {
   posts: {
     getAllTitlesAndDescriptions: async () => {
       const { rows } = await dbPool.query(
-        "SELECT title, description FROM posts"
+        "SELECT id, title, description FROM posts"
       );
       return rows;
     },
     getAll: async () => {
-      const { rows } =
-        await dbPool.query(`SELECT username, TO_CHAR(posted_at,'DD.MM.YY') AS posted_at, title, description
+      const { rows } = await dbPool.query(`
+        SELECT posts.id, username, TO_CHAR(posted_at,'DD.MM.YY') AS posted_at, title, description
         FROM posts INNER JOIN users ON user_id=users.id`);
       return rows;
     },
@@ -194,6 +194,13 @@ const db = {
       dbPool.query(
         "INSERT INTO posts(title,description,user_id) VALUES($1,$2,$3)",
         [title, description, userId]
+      ),
+    delete: (id) =>
+      dbPool.query(
+        `
+          DELETE FROM posts WHERE id=$1
+          `,
+        [id]
       ),
   },
   passcode: {

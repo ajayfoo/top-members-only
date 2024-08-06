@@ -1,0 +1,19 @@
+<% if(isAdmin){%>
+    <article data-id="<%=post.id%>" class="post">
+        <header>
+            <p class="username"><%=post.username%></p>
+            <p class="timestamp"><%=post.posted_at%></p>
+        </header>
+        <p class="title"><%=post.title%></p>
+        <p class="description"><%=post.description%></p>
+    </article>
+<%}else{%>
+    <article class="post">
+        <header>
+            <p class="username"><%=post.username%></p>
+            <p class="timestamp"><%=post.posted_at%></p>
+        </header>
+        <p class="title"><%=post.title%></p>
+        <p class="description"><%=post.description%></p>
+    </article>
+<%}%>

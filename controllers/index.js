@@ -55,7 +55,6 @@ const insertPost = async (req, res) => {
       timestamp: formatDate(Date.now()),
     });
   } catch (err) {
-    console.error(err);
     res.status(500).end();
   }
 };
@@ -107,9 +106,20 @@ const validateAndBecomeAdminMiddlewares = [
   becomeAdmin,
 ];
 
+const deletePost = async (req, res) => {
+  const { id } = req.body;
+  try {
+    await db.posts.delete(id);
+    res.status(200).end();
+  } catch (err) {
+    res.status(500).end();
+  }
+};
+
 export {
   render,
   validateAndInsertPostMiddlewares,
   validateAndJoinMiddlewares,
   validateAndBecomeAdminMiddlewares,
+  deletePost,
 };

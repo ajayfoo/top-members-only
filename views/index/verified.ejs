@@ -16,14 +16,7 @@
     <main>
       <div class="posts">
         <%for(const post of posts){%>
-        <article class="post">
-          <header>
-            <p class="username"><%=post.username%></p>
-            <p class="timestamp"><%=post.posted_at%></p>
-          </header>
-          <p class="title"><%=post.title%></p>
-          <p class="description"><%=post.description%></p>
-        </article>
+          <%- include('partials/verified_post',{isAdmin,post}) %>
         <%}%>
       </div>
     </main>

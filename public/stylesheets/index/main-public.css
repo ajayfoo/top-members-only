@@ -13,7 +13,6 @@
 
 .main-nav > ul {
   display: grid;
-  grid-template-columns: repeat(3, auto);
   justify-content: space-between;
   align-items: center;
 }
@@ -72,27 +71,17 @@ ul {
   gap: var(--padding-small);
   min-width: max-content;
 }
-.dropdown > button {
+
+.dropdown > .item {
   font-size: inherit;
   padding: var(--padding-x-small) var(--padding-small);
   border-radius: var(--radius-x-small);
 }
-.create > button > img,
 .menu-icon {
   width: 1.5rem;
   height: 1.5rem;
 }
-.create > button > img {
-  border: 0.15rem solid var(--on-surface);
-  border-radius: 50%;
-  padding: var(--padding-xx-small);
-}
 
-.create > button {
-  font-size: var(--font-size-mid-large);
-}
-
-.create > button,
 .menu > button {
   display: flex;
   align-items: center;
@@ -100,7 +89,6 @@ ul {
 }
 
 @media screen and (prefers-color-scheme: light) {
-  .create > button > img,
   .menu-icon {
     filter: brightness(0) saturate(100%);
   }
@@ -116,7 +104,7 @@ ul {
   padding: var(--padding-x-small) var(--padding-small);
 }
 
-.dropdown > button:hover {
+.dropdown > .item:hover {
   background-color: var(--surface-container-highest);
 }
 
@@ -140,45 +128,4 @@ ul {
 }
 .post:hover {
   box-shadow: 0 0 4px 3px var(--shadow);
-}
-
-dialog {
-  background-color: var(--surface-container-highest);
-  color: var(--on-surface);
-}
-dialog > form {
-  display: flex;
-  flex-direction: column;
-}
-
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: var(--padding-x-small);
-}
-
-.field > label {
-  align-self: flex-start;
-}
-
-.field > input {
-  border: 0.1rem solid var(--outline);
-}
-.field > input,
-.field > textarea {
-  background-color: var(--surface-container);
-  color: var(--on-surface);
-  font-size: inherit;
-  padding: var(--padding-x-small) var(--padding-xx-small);
-  border-radius: var(--radius-x-small);
-}
-.action-buttons > button:last-child {
-  margin-inline-start: var(--margin-x-small);
-}
-dialog .action-buttons > button {
-  padding: var(--padding-x-small) var(--padding-medium);
-  background-color: var(--primary-container);
-  color: var(--on-primary-container);
-  border: none;
-  border-radius: var(--radius-x-small);
 }

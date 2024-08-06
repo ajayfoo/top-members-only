@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MO: Members Only</title>
     <link rel="stylesheet" href="/stylesheets/main.css" />
-    <link rel="stylesheet" href="/stylesheets/index/main.css" />
+    <link rel="stylesheet" href="/stylesheets/index/main-public.css" />
+    <link rel="stylesheet" href="/stylesheets/index/main-unverified.css" />
     <link rel="stylesheet" href="/stylesheets/index/unverified.css" />
     <script src="/javascripts/index/main.js" defer></script>
     <script src="/javascripts/index/unverified.js" defer></script>
   </head>
   <body>
-    <%- include('main_nav',{isVerified:false}) %>
+    <%- include('main_nav',{isPublic:false,isVerified:false}) %>
     <main>
       <div class="posts">
         <%for(const post of posts){%>

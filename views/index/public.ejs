@@ -6,21 +6,14 @@
     <title>MO: Members Only</title>
     <link rel="stylesheet" href="/stylesheets/main.css" />
     <link rel="stylesheet" href="/stylesheets/index/main-public.css" />
-    <link rel="stylesheet" href="/stylesheets/index/main-unverified.css" />
-    <link rel="stylesheet" href="/stylesheets/index/verified.css" />
-    <script src="/javascripts/index/main.js" defer></script>
-    <script src="/javascripts/index/verified.js" defer></script>
+    <link rel="stylesheet" href="/stylesheets/index/public.css" />
   </head>
   <body>
-    <%- include('main_nav',{isPublic:false,isVerified:true}) %>
+    <%- include('main_nav',{isPublic:true,isVerified:false}) %>
     <main>
       <div class="posts">
         <%for(const post of posts){%>
         <article class="post">
-          <header>
-            <p class="username"><%=post.username%></p>
-            <p class="timestamp"><%=post.posted_at%></p>
-          </header>
           <p class="title"><%=post.title%></p>
           <p class="description"><%=post.description%></p>
         </article>

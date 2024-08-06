@@ -1,0 +1,68 @@
+.main-nav > ul {
+  grid-template-columns: repeat(3, auto);
+}
+
+.create > button > img {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 0.15rem solid var(--on-surface);
+  border-radius: 50%;
+  padding: var(--padding-xx-small);
+}
+
+.create > button {
+  font-size: var(--font-size-mid-large);
+}
+
+.create > button {
+  display: flex;
+  align-items: center;
+  gap: var(--margin-x-small);
+}
+
+@media screen and (prefers-color-scheme: light) {
+  .create > button > img {
+    filter: brightness(0) saturate(100%);
+  }
+}
+
+dialog {
+  background-color: var(--surface-container-highest);
+  color: var(--on-surface);
+}
+dialog > form {
+  display: flex;
+  flex-direction: column;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--padding-x-small);
+}
+
+.field > label {
+  align-self: flex-start;
+}
+
+.field > input {
+  border: 0.1rem solid var(--outline);
+}
+.field > input,
+.field > textarea {
+  background-color: var(--surface-container);
+  color: var(--on-surface);
+  font-size: inherit;
+  padding: var(--padding-x-small) var(--padding-xx-small);
+  border-radius: var(--radius-x-small);
+}
+.action-buttons > button:last-child {
+  margin-inline-start: var(--margin-x-small);
+}
+dialog .action-buttons > button {
+  padding: var(--padding-x-small) var(--padding-medium);
+  background-color: var(--primary-container);
+  color: var(--on-primary-container);
+  border: none;
+  border-radius: var(--radius-x-small);
+}

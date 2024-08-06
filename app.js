@@ -18,15 +18,15 @@ app.use(auth.session());
 
 app.use("/auth", loginRouter);
 
+app.use("/", indexRouter);
+
 app.use((req, res, next) => {
   if (req.isAuthenticated()) {
     next();
   } else {
-    res.redirect("/auth/login");
+    res.redirect("/");
   }
 });
-
-app.use("/", indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

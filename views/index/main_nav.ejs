@@ -3,19 +3,25 @@
     <li>
       <h1>MO</h1>
     </li>
+    <% if(!isPublic){%>
     <li class="create">
       <button aria-label="create post" id="create-post" type="button">
         <img src="/images/plus.svg" alt="" /> Create
       </button>
     </li>
+    <%}%>
     <li class="menu">
       <button type="button">
         <img class="menu-icon" src="/images/burger.svg" alt="" />
       </button>
       <ul class="dropdown" aria-label="submenu">
-        <button id="logout-button" type="button">Log out</button>
-        <%if(!isVerified){%>
-        <button id="join-button" type="button">Join</button>
+        <% if(isPublic){%>
+        <a class="item" href="/auth/login">Login</a>
+        <a class="item" href="/auth/signup">Signup</a>
+        <%}else{%>
+        <button class="item" id="logout-button" type="button">Log out</button>
+        <%}%> <%if(!isPublic && !isVerified){%>
+        <button class="item" id="join-button" type="button">Join</button>
         <%}%>
       </ul>
     </li>

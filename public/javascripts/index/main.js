@@ -39,6 +39,7 @@ createPostForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   if (document.activeElement.id !== createPostBtn.id) {
     createPostDialog.close();
+    return;
   }
   const title = titleTxt.value;
   const descption = descriptionTxt.value;

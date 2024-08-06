@@ -50,6 +50,7 @@ joinDialog.addEventListener("submit", async (e) => {
   e.preventDefault();
   if (document.activeElement.id !== submitJoinFormButton.id) {
     joinDialog.close();
+    return;
   }
   const response = await postJoinRequest(passcodeTxt.value);
   if (response.status === 401) {

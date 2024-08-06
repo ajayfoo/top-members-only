@@ -48,14 +48,15 @@ const renderSignUpPage = (req, res) => {
   });
 };
 
-const usernameExists = async (username) => {
+const usernameIsAvailable = async (username) => {
   const { rows } = await dbPool.query(
     `
     SELECT COUNT(*) AS occurrence FROM users WHERE username=$1
     `,
     [username]
   );
-  return rows[0].occurrence !== 0;
+  console.log(rows[0]);
+  return parseInt(rows[0].occurrence) === 0;
 };
 
 const validationMiddlewaresForSignUpFormFields = [
@@ -95,7 +96,8 @@ const validationMiddlewaresForSignUpFormFields = [
     .bail(),
   body("username")
     .custom(async (value) => {
-      return await usernameExists(va);
+      const isAvailable = await usernameIsAvailable(value);
+      return isAvailable;
     })
     .withMessage("Username not available"),
 ];

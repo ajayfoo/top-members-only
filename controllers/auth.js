@@ -39,11 +39,11 @@ const logout = (req, res) => {
 const renderSignUpPage = (req, res) => {
   console.log("render signup");
   res.render("signup", {
-    firstName: "ajay",
-    lastName: "yay",
-    username: "foo" + Math.floor(Math.random() * 1000),
-    password: "!1aAAAAA",
-    passwordConfirm: "!1aAAAAA",
+    firstName: "",
+    lastName: "",
+    username: "",
+    password: "",
+    passwordConfirm: "",
     errors: [],
   });
 };

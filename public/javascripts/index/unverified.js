@@ -3,6 +3,20 @@ const joinDialog = document.getElementById("join-dialog");
 const joinButton = document.getElementById("join-button");
 const submitJoinFormButton = document.getElementById("submit-join-form-button");
 const passcodeTxt = document.getElementById("passcode");
+const postDetailDialog = document.getElementById("post-detail-dialog");
+const showPostDetail = (p) => {
+  const title = p.querySelector(".title").textContent;
+  const description = p.querySelector(".description").textContent;
+
+  const postDetailTitleEle = postDetailDialog.querySelector(".title");
+  postDetailTitleEle.textContent = title;
+
+  const postDetailDescriptionEle =
+    postDetailDialog.querySelector(".description");
+  postDetailDescriptionEle.textContent = description;
+
+  postDetailDialog.showModal();
+};
 const getNewPostElement = (title, description) => {
   const postEle = document.createElement("article");
   postEle.classList.add("post");
@@ -21,7 +35,11 @@ const getNewPostElement = (title, description) => {
 };
 
 const addPostElement = (title, description) => {
-  postsEle.appendChild(getNewPostElement(title, description));
+  const newPostEle = getNewPostElement(title, description);
+  newPostEle.addEventListener("click", () => {
+    showPostDetail(newPostEle);
+  });
+  postsEle.appendChild(newPostEle);
 };
 
 const postJoinRequest = async (passcode) => {

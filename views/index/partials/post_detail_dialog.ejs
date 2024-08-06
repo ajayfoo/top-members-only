@@ -1,6 +1,6 @@
 <dialog id="post-detail-dialog">
   <form method="dialog">
-    <article class="post">
+    <article class="post-detail">
       <% if(isVerified){%>
       <header>
         <p class="username"></p>
@@ -10,11 +10,12 @@
       <p class="title"></p>
       <p class="description"></p>
     </article>
-    <% if(isAdmin){%>
-    <div class="action-button">
-      <button>Close</button><button>Delete</button>
+    <div class="action-buttons">
+      <button>Close</button>
+      <% if(isAdmin){%>
+        <button>Delete</button>
+      <%}%>
     </div>
-    <%}%>
   </form>
 </dialog>
 

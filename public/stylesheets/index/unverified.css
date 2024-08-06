@@ -1,7 +1,6 @@
 .post {
   padding: var(--padding-small);
 }
-.title {
+.post .title {
   padding-inline: var(--padding-small);
-  font-weight: bold;
 }

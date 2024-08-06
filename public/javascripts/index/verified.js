@@ -5,6 +5,7 @@ const submitBecomeAdminFormButton = document.getElementById(
   "submit-become-admin-form-button"
 );
 const passcodeTxt = document.getElementById("passcode");
+const postDetailDialog = document.getElementById("post-detail-dialog");
 const getNewPostElement = async (title, description, response) => {
   const postEle = document.createElement("article");
   postEle.classList.add("post");
@@ -52,6 +53,28 @@ const postBecomeAdminRequest = async (passcode) => {
   return response;
 };
 
+const showPostDetail = (p) => {
+  console.log(p);
+  const username = p.querySelector(".username").textContent;
+  const timestamp = p.querySelector(".timestamp").textContent;
+  const title = p.querySelector(".title").textContent;
+  const description = p.querySelector(".description").textContent;
+
+  const postDetailusernameEle = postDetailDialog.querySelector(".username");
+  postDetailusernameEle.textContent = username;
+
+  const postDetailTimestampEle = postDetailDialog.querySelector(".timestamp");
+  postDetailTimestampEle.textContent = timestamp;
+
+  const postDetailTitleEle = postDetailDialog.querySelector(".title");
+  postDetailTitleEle.textContent = title;
+
+  const postDetailDescriptionEle =
+    postDetailDialog.querySelector(".description");
+  postDetailDescriptionEle.textContent = description;
+
+  postDetailDialog.showModal();
+};
 becomeAdminButton.addEventListener("click", () => {
   becomeAdminDialog.showModal();
 });

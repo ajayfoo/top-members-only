@@ -120,7 +120,11 @@ ul {
   border-radius: var(--radius-x-small);
   cursor: pointer;
 }
-.description {
+.post .title,
+.post-detail .title {
+  font-weight: bold;
+}
+.post .description {
   overflow: hidden;
   text-overflow: ellipsis;
   max-height: 10lh;
@@ -128,4 +132,26 @@ ul {
 }
 .post:hover {
   box-shadow: 0 0 4px 3px var(--shadow);
+}
+
+#post-detail-dialog {
+  max-width: 65vw;
+}
+#post-detail-dialog > form {
+  flex-direction: column;
+  text-align: start;
+  align-items: center;
+}
+
+#post-detail-dialog > form > .action-buttons > button {
+  background-color: var(--secondary);
+  color: var(--on-secondary);
+  padding: var(--padding-x-small) var(--padding-small);
+  border: none;
+  border-radius: var(--radius-x-small);
+}
+
+#post-detail-dialog > form > .action-buttons {
+  display: flex;
+  gap: var(--margin-small);
 }

@@ -8,6 +8,8 @@ const createPostForm = createPostDialog.querySelector("form:only-of-type");
 const logoutBtn = document.getElementById("logout-button");
 const logoutConfirmDialog = document.getElementById("logout-confirm-dialog");
 
+const allPosts = document.querySelectorAll(".post");
+
 const postPost = (title, description) => {
   return fetch(location.href, {
     headers: {
@@ -36,6 +38,10 @@ const showJoinUnsuccessfulMessage = (msg) => {
   result.textContent = msg;
   resultDialog.showModal();
 };
+
+allPosts.forEach((p) => {
+  p.addEventListener("click", () => showPostDetail(p));
+});
 
 logoutBtn.addEventListener("click", () => {
   logoutConfirmDialog.showModal();

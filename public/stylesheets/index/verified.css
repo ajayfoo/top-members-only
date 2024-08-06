@@ -1,7 +1,8 @@
-.post > header {
+.post > header,
+.post-detail > header {
   border-radius: var(--radius-x-small) var(--radius-x-small) 0 0;
   display: flex;
-  padding: var(--padding-small);
+  padding: var(--padding-small) var(--padding-medium);
   background-color: var(--secondary-container);
   color: var(--on-secondary-container);
   justify-content: space-between;
@@ -12,18 +13,34 @@
 .post {
   padding-block-end: var(--padding-small);
 }
-.title {
-  padding-inline: var(--padding-small);
+.post .title,
+.post-detail .title {
+  padding-inline: var(--padding-medium);
   font-weight: bold;
 }
 
-.post > header > .username {
+.post > header > .username,
+.post-detail > header > .username {
   font-size: var(--font-size-low-large);
 }
-.post > header > .timestamp {
+.post > header > .timestamp,
+.post-detail > header > .timestamp {
   background-color: var(--secondary);
   color: var(--on-secondary);
   border-radius: var(--radius-x-small);
   padding: var(--padding-xx-small) var(--padding-x-small);
   font-size: var(--font-size-small);
+}
+#post-detail-dialog {
+  padding: 0;
+  padding-block-end: var(--padding-medium);
+}
+
+.post-detail .description {
+  padding-inline: var(--padding-small);
+}
+
+.post .description,
+.post-detail .description {
+  padding-inline: var(--padding-medium);
 }

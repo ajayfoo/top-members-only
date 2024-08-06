@@ -69,5 +69,9 @@ const join = async (req, res) => {
     res.status(401).end();
   }
 };
+const validateAndJoinMiddlewares = [
+  body("passcode").isLength({ min: 1, max: 50 }),
+  join,
+];
 
-export { render, validateAndInsertPostMiddlewares, join };
+export { render, validateAndInsertPostMiddlewares, validateAndJoinMiddlewares };

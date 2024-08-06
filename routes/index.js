@@ -1,14 +1,14 @@
 import { Router } from "express";
 import {
-  join,
   render,
   validateAndInsertPostMiddlewares,
+  validateAndJoinMiddlewares,
 } from "../controllers/index.js";
 
 const router = Router();
 
 router.get("/", render);
 router.post("/", validateAndInsertPostMiddlewares);
-router.post("/join", join);
+router.post("/join", validateAndJoinMiddlewares);
 
 export default router;

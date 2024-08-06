@@ -135,7 +135,8 @@ ul {
 }
 
 #post-detail-dialog {
-  max-width: 65vw;
+  width: clamp(35ch, 40vw, 66ch);
+  word-break: break-all;
 }
 #post-detail-dialog > form {
   flex-direction: column;

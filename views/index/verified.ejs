@@ -28,7 +28,7 @@
       </div>
     </main>
     <div class="dialogs">
-      <%- include('common_dialogs') %>
+      <%- include('at_least_unverified_dialogs') %>
       <dialog id="become-admin-dialog">
         <form method="dialog">
           <section class="field">
@@ -53,6 +53,7 @@
           </div>
         </form>
       </dialog>
+      <%- include('partials/post_detail_dialog',{isAdmin,isVerified:true}) %>
     </div>
   </body>
 </html>

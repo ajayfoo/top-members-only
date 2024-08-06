@@ -1,0 +1,23 @@
+<dialog id="post-detail-dialog">
+  <form method="dialog">
+    <article class="post">
+      <% if(isVerified){%>
+      <header>
+        <p class="username"></p>
+        <p class="timestamp"></p>
+      </header>
+      <%}%>
+      <p class="title"></p>
+      <p class="description"></p>
+    </article>
+    <% if(isAdmin){%>
+    <div class="action-button">
+      <button>Close</button><button>Delete</button>
+    </div>
+    <%}%>
+  </form>
+</dialog>
+
+<%if(isAdmin){%>
+  <p>isAdmin</p>
+<%}%>

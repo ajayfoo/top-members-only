@@ -252,6 +252,19 @@ const db = {
       );
       return rows.length === 1;
     },
+    getMemberTypeId: async (userId) => {
+      const { rows } = await dbPool.query(
+        `SELECT member_type_id FROM users
+        WHERE id=$1`,
+        [userId]
+      );
+      return rows[0].member_type_id;
+    },
+    getMemberTypesMap: async () => {
+      const { rows } = await dbPool.query(`
+        SELECT * FROM member_types`);
+      return rows.reduce((acc, curr) => ({ ...acc, [curr.name]: curr.id }), {});
+    },
     changeMemberStatusToGeneral: (userId) => {
       const GENERAL = "GENERAL";
       return dbPool.query(

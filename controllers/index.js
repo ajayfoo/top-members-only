@@ -1,20 +1,34 @@
 import { body } from "express-validator";
 import { db, dbPool } from "../db.js";
+import createHttpError from "http-errors";
 
-const render = async (req, res) => {
+const render = async (req, res, next) => {
   const {
     passport: { user },
   } = req.session;
-  const [isUnverified, allPosts, allPostTitlesAndDescriptions] =
+  const [memberTypeId, memberTypesMap, allPosts, allPostTitlesAndDescriptions] =
     await Promise.all([
-      db.users.isUnverified(user),
+      db.users.getMemberTypeId(user),
+      db.users.getMemberTypesMap(),
       db.posts.getAll(),
       db.posts.getAllTitlesAndDescriptions(),
     ]);
-  if (isUnverified) {
-    res.render("index/unverified", { posts: allPostTitlesAndDescriptions });
-  } else {
-    res.render("index/verified", { posts: allPosts });
+  switch (memberTypeId) {
+    case memberTypesMap.UNVERIFIED: {
+      res.render("index/unverified", { posts: allPostTitlesAndDescriptions });
+      return;
+    }
+    case memberTypesMap.GENERAL: {
+      res.render("index/verified", { posts: allPosts, isAdmin: false });
+      return;
+    }
+    case memberTypesMap.ADMIN: {
+      res.render("index/verified", { posts: allPosts, isAdmin: true });
+      return;
+    }
+    default: {
+      next(createHttpError(500));
+    }
   }
 };
 

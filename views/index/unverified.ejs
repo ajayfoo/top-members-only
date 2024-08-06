@@ -24,7 +24,8 @@
       </div>
     </main>
     <div class="dialogs">
-      <%- include('common_dialogs') %>
+      <%- include('at_least_unverified_dialogs') %>
+      <%- include('partials/post_detail_dialog',{isVerified:false,isAdmin:false}) %>
       <dialog id="join-dialog">
         <form method="dialog">
           <section class="field">

@@ -22,6 +22,10 @@
         <button class="item" id="logout-button" type="button">Log out</button>
         <%}%> <%if(!isPublic && !isVerified){%>
         <button class="item" id="join-button" type="button">Join</button>
+        <%}else if(isVerified){%>
+        <button class="item" id="become-admin-button" type="button">
+          Become Admin
+        </button>
         <%}%>
       </ul>
     </li>

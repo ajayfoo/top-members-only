@@ -61,7 +61,7 @@ const join = async (req, res) => {
   const {
     passport: { user },
   } = req.session;
-  const currentPasscode = await db.passcode.get();
+  const currentPasscode = await db.passcode.getForGeneral();
   if (currentPasscode === passcode) {
     await db.users.changeMemberStatusToGeneral(user);
     res.status(200).end();
@@ -74,4 +74,28 @@ const validateAndJoinMiddlewares = [
   join,
 ];
 
-export { render, validateAndInsertPostMiddlewares, validateAndJoinMiddlewares };
+const becomeAdmin = async (req, res) => {
+  const { passcode } = req.body;
+  const {
+    passport: { user },
+  } = req.session;
+  const currentPasscode = await db.passcode.getForAdmin();
+  if (currentPasscode === passcode) {
+    await db.users.changeMemberStatusToAdmin(user);
+    res.status(200).end();
+  } else {
+    res.status(401).end();
+  }
+};
+
+const validateAndBecomeAdminMiddlewares = [
+  body("passcode").isLength({ min: 1, max: 50 }),
+  becomeAdmin,
+];
+
+export {
+  render,
+  validateAndInsertPostMiddlewares,
+  validateAndJoinMiddlewares,
+  validateAndBecomeAdminMiddlewares,
+};

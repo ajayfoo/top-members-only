@@ -27,6 +27,32 @@
         <%}%>
       </div>
     </main>
-    <div class="dialogs"><%- include('common_dialogs') %></div>
+    <div class="dialogs">
+      <%- include('common_dialogs') %>
+      <dialog id="become-admin-dialog">
+        <form method="dialog">
+          <section class="field">
+            <label for="passcode">Enter secret passcode to become admin</label>
+            <input
+              type="text"
+              maxlength="50"
+              required
+              id="passcode"
+              name="passcode"
+            />
+          </section>
+          <div class="action-buttons">
+            <button
+              formmethod="post"
+              id="submit-become-admin-form-button"
+              formaction="/become-admin"
+            >
+              Become Admin
+            </button>
+            <button formnovalidate>Cancel</button>
+          </div>
+        </form>
+      </dialog>
+    </div>
   </body>
 </html>

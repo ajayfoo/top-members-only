@@ -197,9 +197,27 @@ const db = {
       ),
   },
   passcode: {
-    get: async () => {
+    getForGeneral: async () => {
+      const GENERAL = "GENERAL";
       const { rows } = await dbPool.query(
-        "SELECT passcode FROM passcodes LIMIT 1"
+        `
+        SELECT passcode FROM passcodes
+        WHERE member_type_id=(SELECT id FROM member_types WHERE name=$1)
+        LIMIT 1
+        `,
+        [GENERAL]
+      );
+      return rows[0].passcode;
+    },
+    getForAdmin: async () => {
+      const ADMIN = "ADMIN";
+      const { rows } = await dbPool.query(
+        `
+        SELECT passcode FROM passcodes
+        WHERE member_type_id=(SELECT id FROM member_types WHERE name=$1)
+        LIMIT 1
+        `,
+        [ADMIN]
       );
       return rows[0].passcode;
     },
@@ -237,12 +255,19 @@ const db = {
     changeMemberStatusToGeneral: (userId) => {
       const GENERAL = "GENERAL";
       return dbPool.query(
-        `
-        UPDATE users SET member_type_id=(
+        `UPDATE users SET member_type_id=(
           SELECT id FROM member_types WHERE name=$1)
-        WHERE id=$2
-        `,
+        WHERE id=$2`,
         [GENERAL, userId]
+      );
+    },
+    changeMemberStatusToAdmin: (userId) => {
+      const ADMIN = "ADMIN";
+      return dbPool.query(
+        `UPDATE users SET member_type_id=(
+          SELECT id FROM member_types WHERE name=$1)
+        WHERE id=$2`,
+        [ADMIN, userId]
       );
     },
   },

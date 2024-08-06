@@ -31,6 +31,12 @@ const showPostCreationResult = (done) => {
   resultDialog.showModal();
 };
 
+const showJoinUnsuccessfulMessage = (msg) => {
+  const result = resultDialog.querySelector("form>.result");
+  result.textContent = msg;
+  resultDialog.showModal();
+};
+
 logoutBtn.addEventListener("click", () => {
   logoutConfirmDialog.showModal();
 });

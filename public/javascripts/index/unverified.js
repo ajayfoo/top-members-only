@@ -36,12 +36,6 @@ const postJoinRequest = async (passcode) => {
   return response;
 };
 
-const showJoinUnsuccessfulMessage = (msg) => {
-  const result = resultDialog.querySelector("form>.result");
-  result.textContent = msg;
-  resultDialog.showModal();
-};
-
 joinButton.addEventListener("click", () => {
   joinDialog.showModal();
 });

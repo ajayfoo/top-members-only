@@ -3,11 +3,17 @@
 }
 
 .create > button > img {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: clamp(1.3rem, 2vw, 3rem);
+  height: clamp(1.3rem, 2vw, 3rem);
   border: 0.15rem solid var(--on-surface);
   border-radius: 50%;
   padding: var(--padding-xx-small);
+}
+
+@media screen and (max-width: 425px) {
+  .create > button > img {
+    padding: var(--padding-x-small);
+  }
 }
 
 .create > button {

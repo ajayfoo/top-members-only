@@ -4,4 +4,4 @@
 
 - [x] Admin join form
 - [x] Post detail view
-- [ ] Username validation for signup form
+- [x] Username validation for signup form

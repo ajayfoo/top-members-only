@@ -2,7 +2,7 @@ import { body, validationResult } from "express-validator";
 import auth from "../middlewares/auth.js";
 import bcrypt from "bcrypt";
 import "dotenv/config";
-import { db } from "../db.js";
+import { db, dbPool } from "../db.js";
 
 const goToHome = (req, res, next) => {
   res.redirect("../../");
@@ -48,6 +48,16 @@ const renderSignUpPage = (req, res) => {
   });
 };
 
+const usernameExists = async (username) => {
+  const { rows } = await dbPool.query(
+    `
+    SELECT COUNT(*) AS occurrence FROM users WHERE username=$1
+    `,
+    [username]
+  );
+  return rows[0].occurrence !== 0;
+};
+
 const validationMiddlewaresForSignUpFormFields = [
   body("first_name")
     .trim()
@@ -81,7 +91,13 @@ const validationMiddlewaresForSignUpFormFields = [
     ),
   body("password_confirm")
     .custom((value, { req }) => value === req.body.password)
-    .withMessage("Confirmation password doesn't match with original password"),
+    .withMessage("Confirmation password doesn't match with original password")
+    .bail(),
+  body("username")
+    .custom(async (value) => {
+      return await usernameExists(va);
+    })
+    .withMessage("Username not available"),
 ];
 
 const handleValidationErrors = (req, res, next) => {

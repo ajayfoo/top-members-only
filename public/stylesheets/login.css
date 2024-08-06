@@ -91,12 +91,13 @@ form {
 @media screen and (prefers-color-scheme: dark) {
   .message > img,
   .error > img {
-    filter: invert(98%) sepia(4%) saturate(3541%) hue-rotate(296deg)
-      brightness(100%) contrast(103%);
+    filter: brightness(0) saturate(100%) invert(87%) sepia(2%) saturate(3855%)
+      hue-rotate(315deg) brightness(105%) contrast(100%);
   }
 }
 
 .errors {
+  margin-block-start: var(--margin-small);
   background-color: var(--error-container);
   color: var(--on-error-container);
   border-radius: var(--radius-x-small);

@@ -2,6 +2,7 @@ import express from "express";
 import configuredSession from "./middlewares/session.js";
 import auth from "./middlewares/auth.js";
 import loginRouter from "./routes/auth.js";
+import publicRouter from "./routes/public.js";
 import indexRouter from "./routes/index.js";
 import "dotenv/config";
 import bodyParser from "body-parser";
@@ -18,7 +19,7 @@ app.use(auth.session());
 
 app.use("/auth", loginRouter);
 
-app.use("/", indexRouter);
+app.use("/", publicRouter);
 
 app.use((req, res, next) => {
   if (req.isAuthenticated()) {
@@ -27,6 +28,8 @@ app.use((req, res, next) => {
     res.redirect("/");
   }
 });
+
+app.use("/", indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

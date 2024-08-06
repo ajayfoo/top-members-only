@@ -2,19 +2,15 @@ import { body } from "express-validator";
 import { db, dbPool } from "../db.js";
 
 const render = async (req, res) => {
-  const allPostTitlesAndDescriptions =
-    await db.posts.getAllTitlesAndDescriptions();
-  if (!req.isAuthenticated()) {
-    res.render("index/public", { posts: allPostTitlesAndDescriptions });
-    return;
-  }
   const {
     passport: { user },
   } = req.session;
-  const [isUnverified, allPosts] = await Promise.all([
-    db.users.isUnverified(user),
-    db.posts.getAll(),
-  ]);
+  const [isUnverified, allPosts, allPostTitlesAndDescriptions] =
+    await Promise.all([
+      db.users.isUnverified(user),
+      db.posts.getAll(),
+      db.posts.getAllTitlesAndDescriptions(),
+    ]);
   if (isUnverified) {
     res.render("index/unverified", { posts: allPostTitlesAndDescriptions });
   } else {

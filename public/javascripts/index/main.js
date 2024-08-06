@@ -2,11 +2,22 @@ const createPostDialog = document.getElementById("create-post-dialog");
 const createPostBtn = document.getElementById("create-post");
 const titleTxt = document.getElementById("title");
 const descriptionTxt = document.getElementById("description");
-const progressDialog = document.getElementById("progress-dialog");
 const resultDialog = document.getElementById("result-dialog");
 const createPostForm = createPostDialog.querySelector("form:only-of-type");
 const logoutBtn = document.getElementById("logout-button");
 const logoutConfirmDialog = document.getElementById("logout-confirm-dialog");
+
+const showProgress = (msg) => {
+  const progressDialog = document.getElementById("progress-dialog");
+  const progressMessage = document.getElementById("progress-message");
+  progressMessage.textContent = msg;
+  progressDialog.showModal();
+};
+
+const hideProgress = () => {
+  const progressDialog = document.getElementById("progress-dialog");
+  progressDialog.close();
+};
 
 const postPost = (title, description) => {
   return fetch(location.href, {
@@ -50,7 +61,7 @@ createPostForm.addEventListener("submit", async (e) => {
   const title = titleTxt.value;
   const descption = descriptionTxt.value;
   try {
-    progressDialog.showModal();
+    showProgress("Creating your post...");
     const response = await postPost(title, descption);
     if (response.ok) {
       createPostDialog.close();
@@ -59,7 +70,7 @@ createPostForm.addEventListener("submit", async (e) => {
     }
     showPostCreationResult(response.ok);
   } finally {
-    progressDialog.close();
+    hideProgress();
   }
 });
 createPostBtn.addEventListener("click", () => {

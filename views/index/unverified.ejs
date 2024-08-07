@@ -13,6 +13,7 @@
   </head>
   <body>
     <%- include('main_nav',{isPublic:false,isVerified:false}) %>
+    <%- include('partials/welcome',{username}) %>
     <main>
       <div class="posts">
         <%for(const post of posts){%>

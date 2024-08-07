@@ -4,26 +4,38 @@ import createHttpError from "http-errors";
 
 const render = async (req, res, next) => {
   const {
-    passport: { user },
+    passport: { user: userId },
   } = req.session;
-  const [memberTypeId, memberTypesMap, allPosts, allPostTitlesAndDescriptions] =
+  const [user, memberTypesMap, allPosts, allPostTitlesAndDescriptions] =
     await Promise.all([
-      db.users.getMemberTypeId(user),
+      db.users.getUser(userId),
       db.users.getMemberTypesMap(),
       db.posts.getAll(),
       db.posts.getAllTitlesAndDescriptions(),
     ]);
-  switch (memberTypeId) {
+  const username = user.username;
+  switch (user.member_type_id) {
     case memberTypesMap.UNVERIFIED: {
-      res.render("index/unverified", { posts: allPostTitlesAndDescriptions });
+      res.render("index/unverified", {
+        username,
+        posts: allPostTitlesAndDescriptions,
+      });
       return;
     }
     case memberTypesMap.GENERAL: {
-      res.render("index/verified", { posts: allPosts, isAdmin: false });
+      res.render("index/verified", {
+        username,
+        posts: allPosts,
+        isAdmin: false,
+      });
       return;
     }
     case memberTypesMap.ADMIN: {
-      res.render("index/verified", { posts: allPosts, isAdmin: true });
+      res.render("index/verified", {
+        username,
+        posts: allPosts,
+        isAdmin: true,
+      });
       return;
     }
     default: {

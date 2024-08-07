@@ -259,13 +259,13 @@ const db = {
       );
       return rows.length === 1;
     },
-    getMemberTypeId: async (userId) => {
+    getUser: async (userId) => {
       const { rows } = await dbPool.query(
-        `SELECT member_type_id FROM users
+        `SELECT * FROM users
         WHERE id=$1`,
         [userId]
       );
-      return rows[0].member_type_id;
+      return rows[0];
     },
     getMemberTypesMap: async () => {
       const { rows } = await dbPool.query(`

@@ -32,6 +32,14 @@
   }
 }
 
+.banner {
+  font-weight: 300;
+  margin: var(--margin-small);
+}
+.banner > .username {
+  font-weight: bold;
+}
+
 dialog {
   background-color: var(--surface-container-highest);
   color: var(--on-surface);

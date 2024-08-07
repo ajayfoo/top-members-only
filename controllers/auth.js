@@ -37,7 +37,6 @@ const logout = (req, res) => {
 };
 
 const renderSignUpPage = (req, res) => {
-  console.log("render signup");
   res.render("signup", {
     firstName: "",
     lastName: "",
@@ -55,7 +54,6 @@ const usernameIsAvailable = async (username) => {
     `,
     [username]
   );
-  console.log(rows[0]);
   return parseInt(rows[0].occurrence) === 0;
 };
 
@@ -105,7 +103,6 @@ const validationMiddlewaresForSignUpFormFields = [
 const handleValidationErrors = (req, res, next) => {
   const { errors } = validationResult(req);
   if (errors.length != 0) {
-    console.log(errors);
     const { first_name, last_name, username, password, password_confirm } =
       req.body;
     res.render("signup", {
@@ -126,8 +123,6 @@ const validationAndSignUpMiddleware = [
   handleValidationErrors,
   async (req, res, next) => {
     const { first_name, last_name, username, password } = req.body;
-    console.log(password);
-    console.log(process.env.BCRYPT_SALT_ROUNDS);
     try {
       const passwordHash = await bcrypt.hash(
         password,

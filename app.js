@@ -1,7 +1,7 @@
 import express from "express";
 import configuredSession from "./middlewares/session.js";
 import auth from "./middlewares/auth.js";
-import loginRouter from "./routes/auth.js";
+import authRouter from "./routes/auth.js";
 import publicRouter from "./routes/public.js";
 import indexRouter from "./routes/index.js";
 import "dotenv/config";
@@ -17,7 +17,7 @@ app.use(express.static("public"));
 app.use(configuredSession);
 app.use(auth.session());
 
-app.use("/auth", loginRouter);
+app.use("/auth", authRouter);
 
 app.use("/", publicRouter);
 

@@ -9,9 +9,18 @@ import {
 
 const router = Router();
 
+router.post("/logout", logout);
+
+router.use("/", (req, res, next) => {
+  if (req.isAuthenticated()) {
+    res.redirect("../");
+  } else {
+    next();
+  }
+});
+
 router.get("/login", renderLoginPage);
 router.post("/login", loginMiddlewares);
-router.post("/logout", logout);
 
 router.get("/signup", renderSignUpPage);
 router.post("/signup", validationAndSignUpMiddleware);

@@ -1,8 +1,8 @@
 const postsEle = document.querySelector("main>.posts");
 const becomeAdminDialog = document.getElementById("become-admin-dialog");
 const becomeAdminButton = document.getElementById("become-admin-button");
-const submitBecomeAdminFormButton = document.getElementById(
-  "submit-become-admin-form-button"
+const cancelBecomeAdminFormButton = document.getElementById(
+  "cancel-become-admin-form-button"
 );
 const postDetailDialog = document.getElementById("post-detail-dialog");
 const allPostElements = document.querySelectorAll(".post");
@@ -36,7 +36,7 @@ becomeAdminButton.addEventListener("click", () => {
 
 becomeAdminDialog.addEventListener("submit", async (e) => {
   e.preventDefault();
-  if (document.activeElement.id !== submitBecomeAdminFormButton.id) {
+  if (document.activeElement.id === cancelBecomeAdminFormButton.id) {
     becomeAdminDialog.close();
     return;
   }

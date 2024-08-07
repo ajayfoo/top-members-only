@@ -1,7 +1,7 @@
 const postsEle = document.querySelector("main>.posts");
 const joinDialog = document.getElementById("join-dialog");
 const joinButton = document.getElementById("join-button");
-const submitJoinFormButton = document.getElementById("submit-join-form-button");
+const cancelJoinFormButton = document.getElementById("cancel-join-form-button");
 const passcodeTxt = document.getElementById("passcode");
 const postDetailDialog = document.getElementById("post-detail-dialog");
 const allPostElements = document.querySelectorAll(".post");
@@ -65,7 +65,7 @@ joinButton.addEventListener("click", () => {
 
 joinDialog.addEventListener("submit", async (e) => {
   e.preventDefault();
-  if (document.activeElement.id !== submitJoinFormButton.id) {
+  if (document.activeElement.id === cancelJoinFormButton.id) {
     joinDialog.close();
     return;
   }

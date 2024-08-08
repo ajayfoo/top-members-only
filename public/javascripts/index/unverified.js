@@ -3,8 +3,13 @@ import {
   attachCommonEventListeners,
 } from "./utils/common.js";
 
-const showPostDetail = (title, description) => {
+const postViewModelMap = new Map();
+
+const showPostDetail = (postEle) => {
+  const { title, description } = postViewModelMap.get(postEle);
+
   const postDetailDialog = document.getElementById("post-detail-dialog");
+
   const postDetailTitleEle = postDetailDialog.querySelector(".title");
   postDetailTitleEle.textContent = title;
 
@@ -36,9 +41,13 @@ const addPostElement = (title, description) => {
   const newPostEle = getNewPostElement(title, description);
   const postsEle = document.querySelector("main>.posts");
   newPostEle.addEventListener("click", () => {
-    showPostDetail(title, description);
+    showPostDetail(newPostEle);
   });
   postsEle.appendChild(newPostEle);
+  postViewModelMap.set(newPostEle, {
+    title,
+    description,
+  });
 };
 
 const postJoinRequest = async (passcode) => {
@@ -56,9 +65,13 @@ const postJoinRequest = async (passcode) => {
 const attachEventListeners = () => {
   forAllPostElementsDo((p) => {
     const title = p.querySelector(".title").textContent;
-    const description = p.querySelector(".description").textContent;
+    const description = p.querySelector(".title").textContent;
+    postViewModelMap.set(p, {
+      title,
+      description,
+    });
     p.addEventListener("click", () => {
-      showPostDetail(title, description);
+      showPostDetail(p);
     });
   });
 

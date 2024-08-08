@@ -1,5 +1,24 @@
 import { attachCommonEventListeners } from "./utils/common.js";
-import { attachCommonVerifiedEventListeners } from "./utils/verified.js";
+import {
+  onSuccessfulPostCreationDo,
+  getNewPostElement,
+  showPostDetail,
+} from "./utils/verified.js";
+
+const postViewModelMap = new Map();
+const addPostElement = async (postsEle, title, description, response) => {
+  const { username, timestamp } = await response.json();
+  const post = {
+    username,
+    timestamp,
+    title,
+    description,
+  };
+  console.log(post);
+  const newPostElement = getNewPostElement(post);
+  postViewModelMap.set(newPostElement, post);
+  postsEle.appendChild(newPostElement);
+};
 
 const postBecomeAdminRequest = async (passcode) => {
   const url = location.href + "become-admin";
@@ -14,6 +33,19 @@ const postBecomeAdminRequest = async (passcode) => {
 };
 
 const attachEventListeners = () => {
+  const allPostElements = document.querySelectorAll(".post");
+  allPostElements.forEach((p) => {
+    const username = p.querySelector(".username").textContent;
+    const timestamp = p.querySelector(".timestamp").textContent;
+    const title = p.querySelector(".title").textContent;
+    const description = p.querySelector(".description").textContent;
+    const post = { username, timestamp, title, description };
+    postViewModelMap.set(p, post);
+    p.addEventListener("click", () => {
+      showPostDetail(post);
+    });
+  });
+
   const becomeAdminDialog = document.getElementById("become-admin-dialog");
   const becomeAdminButton = document.getElementById("become-admin-button");
   becomeAdminButton.addEventListener("click", () => {
@@ -42,6 +74,6 @@ const attachEventListeners = () => {
 };
 
 attachCommonEventListeners();
-attachCommonVerifiedEventListeners();
+onSuccessfulPostCreationDo(addPostElement);
 
 attachEventListeners();

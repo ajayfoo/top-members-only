@@ -1,4 +1,5 @@
-const getNewPostElement = ({ username, timestamp, title, description }) => {
+const getNewPostElement = (post) => {
+  const { username, timestamp, title, description } = post;
   const postEle = document.createElement("article");
   postEle.classList.add("post");
 
@@ -25,30 +26,14 @@ const getNewPostElement = ({ username, timestamp, title, description }) => {
 
   postEle.append(header, titleEle, descriptionEle);
   postEle.addEventListener("click", () => {
-    showPostDetail(postEle);
+    showPostDetail(post);
   });
 
   return postEle;
 };
 
-const postViewModelMap = new Map();
-const addPostElement = async (postsEle, title, description, response) => {
-  const { username, timestamp } = await response.json();
-  const post = {
-    username,
-    timestamp,
-    title,
-    description,
-  };
-  console.log(post);
-  const newPostElement = getNewPostElement(post);
-  postViewModelMap.set(newPostElement, post);
-  postsEle.appendChild(newPostElement);
-};
-
-const showPostDetail = (postEle) => {
-  const { username, timestamp, title, description } =
-    postViewModelMap.get(postEle);
+const showPostDetail = (post) => {
+  const { username, timestamp, title, description } = post;
 
   const postDetailDialog = document.getElementById("post-detail-dialog");
   const postDetailusernameEle = postDetailDialog.querySelector(".username");
@@ -67,25 +52,12 @@ const showPostDetail = (postEle) => {
   postDetailDialog.showModal();
 };
 
-const attachCommonVerifiedEventListeners = () => {
+const onSuccessfulPostCreationDo = (addPostElement) => {
   const postsEle = document.querySelector("main>.posts");
   window.addEventListener("postCreationSuccessful", async (e) => {
     const { title, description, response } = e.detail;
     await addPostElement(postsEle, title, description, response);
   });
-
-  const allPostElements = document.querySelectorAll(".post");
-  allPostElements.forEach((p) => {
-    const username = p.querySelector(".username").textContent;
-    const timestamp = p.querySelector(".timestamp").textContent;
-    const title = p.querySelector(".title").textContent;
-    const description = p.querySelector(".description").textContent;
-    const post = { username, timestamp, title, description };
-    postViewModelMap.set(p, post);
-    p.addEventListener("click", () => {
-      showPostDetail(p);
-    });
-  });
 };
 
-export { attachCommonVerifiedEventListeners };
+export { onSuccessfulPostCreationDo, getNewPostElement, showPostDetail };

@@ -4,19 +4,44 @@ import {
   showMessage,
   hideProgress,
 } from "./utils/common.js";
-import { attachCommonVerifiedEventListeners } from "./utils/verified.js";
+import {
+  onSuccessfulPostCreationDo,
+  showPostDetail,
+  getNewPostElement,
+} from "./utils/verified.js";
 
-const deletePostElement = (id) =>
-  document.querySelector(`[data-id="${id}"]`).remove();
+const postViewModelMap = new Map();
+let selectedPostElement = null;
+const addPostElement = async (postsEle, title, description, response) => {
+  const { username, timestamp, id } = await response.json();
+  const post = {
+    id,
+    username,
+    timestamp,
+    title,
+    description,
+  };
+  const newPostElement = getNewPostElement(post);
+  postViewModelMap.set(newPostElement, post);
+  postsEle.appendChild(newPostElement);
+  newPostElement.addEventListener("click", () => {
+    selectedPostElement = newPostElement;
+  });
+};
 
 const attachEventListeners = () => {
   const allPostElements = document.querySelectorAll(".post");
-  let selectedPostId = null;
   allPostElements.forEach((p) => {
+    const username = p.querySelector(".username").textContent;
+    const timestamp = p.querySelector(".timestamp").textContent;
+    const title = p.querySelector(".title").textContent;
+    const description = p.querySelector(".description").textContent;
     const id = p.dataset.id;
+    const post = { username, timestamp, title, description, id };
+    postViewModelMap.set(p, post);
     p.addEventListener("click", () => {
-      selectedPostId = id;
-      console.log(selectedPostId);
+      selectedPostElement = p;
+      showPostDetail(post);
     });
   });
 
@@ -29,19 +54,20 @@ const attachEventListeners = () => {
       postDetailDialog.close();
       return;
     }
+    const { id } = postViewModelMap.get(selectedPostElement);
     showProgress("Deleting the post...");
     const response = await fetch(location.href, {
       headers: {
         "Content-Type": "application/json",
       },
       method: "DELETE",
-      body: JSON.stringify({ id: selectedPostId }),
+      body: JSON.stringify({ id }),
     });
     if (response.ok) {
       showMessage("Successfully deleted post");
       hideProgress();
       postDetailDialog.close();
-      deletePostElement(selectedPostId);
+      selectedPostElement.remove();
     } else {
       showMessage("Failed to delete post");
     }
@@ -49,5 +75,5 @@ const attachEventListeners = () => {
 };
 
 attachCommonEventListeners();
-attachCommonVerifiedEventListeners();
+onSuccessfulPostCreationDo(addPostElement);
 attachEventListeners();

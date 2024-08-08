@@ -8,12 +8,10 @@
     <link rel="stylesheet" href="/stylesheets/index/main-public.css" />
     <link rel="stylesheet" href="/stylesheets/index/main-unverified.css" />
     <link rel="stylesheet" href="/stylesheets/index/verified.css" />
-    <script src="/javascripts/index/main.js" defer></script>
-    <script src="/javascripts/index/common-verified.js" defer></script>
     <%if(isAdmin){%>
     <script src="/javascripts/index/admin.js" defer></script>
     <%}else{%>
-    <script src="/javascripts/index/verified.js" defer></script>
+    <script type="module" src="/javascripts/index/verified.js" defer></script>
     <%}%>
   </head>
   <body>

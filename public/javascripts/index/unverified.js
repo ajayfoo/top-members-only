@@ -65,7 +65,7 @@ const postJoinRequest = async (passcode) => {
 const attachEventListeners = () => {
   forAllPostElementsDo((p) => {
     const title = p.querySelector(".title").textContent;
-    const description = p.querySelector(".title").textContent;
+    const description = p.querySelector(".description").textContent;
     postViewModelMap.set(p, {
       title,
       description,

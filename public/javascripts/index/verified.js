@@ -1,5 +1,5 @@
-import { attachCommonEventListeners } from "./utils.js";
-import { attachCommonVerifiedEventListeners } from "./verified-utils.js";
+import { attachCommonEventListeners } from "./utils/common.js";
+import { attachCommonVerifiedEventListeners } from "./utils/verified.js";
 
 const postBecomeAdminRequest = async (passcode) => {
   const url = location.href + "become-admin";

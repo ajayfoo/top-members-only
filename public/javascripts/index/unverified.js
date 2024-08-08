@@ -1,10 +1,9 @@
-import { forAllPostElementsDo, attachCommonEventListeners } from "./utils.js";
+import {
+  forAllPostElementsDo,
+  attachCommonEventListeners,
+} from "./utils/common.js";
 
-attachCommonEventListeners();
-const showPostDetail = (p) => {
-  const title = p.querySelector(".title").textContent;
-  const description = p.querySelector(".description").textContent;
-
+const showPostDetail = (title, description) => {
   const postDetailDialog = document.getElementById("post-detail-dialog");
   const postDetailTitleEle = postDetailDialog.querySelector(".title");
   postDetailTitleEle.textContent = title;
@@ -15,9 +14,6 @@ const showPostDetail = (p) => {
 
   postDetailDialog.showModal();
 };
-forAllPostElementsDo((p) => {
-  p.addEventListener("click", () => showPostDetail(p));
-});
 
 const getNewPostElement = (title, description) => {
   const postEle = document.createElement("article");
@@ -40,14 +36,10 @@ const addPostElement = (title, description) => {
   const newPostEle = getNewPostElement(title, description);
   const postsEle = document.querySelector("main>.posts");
   newPostEle.addEventListener("click", () => {
-    showPostDetail(newPostEle);
+    showPostDetail(title, description);
   });
   postsEle.appendChild(newPostEle);
 };
-window.addEventListener("postCreationSuccessful", (e) => {
-  const { title, description } = e.detail;
-  addPostElement(title, description);
-});
 
 const postJoinRequest = async (passcode) => {
   const url = location.href + "join";
@@ -61,28 +53,46 @@ const postJoinRequest = async (passcode) => {
   return response;
 };
 
-const joinDialog = document.getElementById("join-dialog");
-const joinButton = document.getElementById("join-button");
-joinButton.addEventListener("click", () => {
-  joinDialog.showModal();
-});
+const attachEventListeners = () => {
+  forAllPostElementsDo((p) => {
+    const title = p.querySelector(".title").textContent;
+    const description = p.querySelector(".description").textContent;
+    p.addEventListener("click", () => {
+      showPostDetail(title, description);
+    });
+  });
 
-joinDialog.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const cancelJoinFormButton = document.getElementById(
-    "cancel-join-form-button"
-  );
-  if (document.activeElement.id === cancelJoinFormButton.id) {
-    joinDialog.close();
-    return;
-  }
-  const passcodeTxt = document.getElementById("passcode");
-  const response = await postJoinRequest(passcodeTxt.value);
-  if (response.status === 401) {
-    showMessage("Wrong passcode");
-  } else if (!response.ok) {
-    showMessage("Something went wrong");
-  } else if (response.ok) {
-    location.reload();
-  }
-});
+  window.addEventListener("postCreationSuccessful", (e) => {
+    const { title, description } = e.detail;
+    addPostElement(title, description);
+  });
+
+  const joinDialog = document.getElementById("join-dialog");
+  const joinButton = document.getElementById("join-button");
+  joinButton.addEventListener("click", () => {
+    joinDialog.showModal();
+  });
+
+  joinDialog.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const cancelJoinFormButton = document.getElementById(
+      "cancel-join-form-button"
+    );
+    if (document.activeElement.id === cancelJoinFormButton.id) {
+      joinDialog.close();
+      return;
+    }
+    const passcodeTxt = document.getElementById("passcode");
+    const response = await postJoinRequest(passcodeTxt.value);
+    if (response.status === 401) {
+      showMessage("Wrong passcode");
+    } else if (!response.ok) {
+      showMessage("Something went wrong");
+    } else if (response.ok) {
+      location.reload();
+    }
+  });
+};
+
+attachCommonEventListeners();
+attachEventListeners();

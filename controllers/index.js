@@ -58,13 +58,15 @@ const insertPost = async (req, res) => {
     passport: { user },
   } = req.session;
   try {
-    const [, { rows }] = await Promise.all([
+    const [{ rows: posts }, { rows: users }] = await Promise.all([
       db.posts.insert(title, description, user),
       dbPool.query("SELECT username FROM users WHERE id=$1", [user]),
     ]);
+    const { id, timestamp } = posts[0];
     res.json({
-      username: rows[0].username,
-      timestamp: formatDate(Date.now()),
+      id,
+      timestamp: formatDate(timestamp),
+      username: users[0].username,
     });
   } catch (err) {
     res.status(500).end();

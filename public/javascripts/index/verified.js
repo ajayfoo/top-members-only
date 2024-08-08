@@ -14,7 +14,6 @@ const addPostElement = async (postsEle, title, description, response) => {
     title,
     description,
   };
-  console.log(post);
   const newPostElement = getNewPostElement(post);
   postViewModelMap.set(newPostElement, post);
   postsEle.appendChild(newPostElement);

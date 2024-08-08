@@ -13,7 +13,9 @@ import {
 const postViewModelMap = new Map();
 let selectedPostElement = null;
 const addPostElement = async (postsEle, title, description, response) => {
+  showProgress("Loading...");
   const { username, timestamp, id } = await response.json();
+  hideProgress();
   const post = {
     id,
     username,
@@ -56,20 +58,25 @@ const attachEventListeners = () => {
     }
     const { id } = postViewModelMap.get(selectedPostElement);
     showProgress("Deleting the post...");
-    const response = await fetch(location.href, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "DELETE",
-      body: JSON.stringify({ id }),
-    });
-    if (response.ok) {
-      showMessage("Successfully deleted post");
+    try {
+      const response = await fetch(location.href, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "DELETE",
+        body: JSON.stringify({ id }),
+      });
+      if (response.ok) {
+        showMessage("Successfully deleted post");
+        postDetailDialog.close();
+        selectedPostElement.remove();
+      } else {
+        showMessage("Failed to delete post");
+      }
+    } catch (err) {
+      showMessage("Something went wrong");
+    } finally {
       hideProgress();
-      postDetailDialog.close();
-      selectedPostElement.remove();
-    } else {
-      showMessage("Failed to delete post");
     }
   });
 };

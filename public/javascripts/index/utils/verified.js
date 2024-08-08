@@ -1,3 +1,5 @@
+import { hideProgress, showProgress } from "./common.js";
+
 const getNewPostElement = (post) => {
   const { username, timestamp, title, description } = post;
   const postEle = document.createElement("article");

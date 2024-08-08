@@ -1,6 +1,9 @@
 import {
   forAllPostElementsDo,
   attachCommonEventListeners,
+  showProgress,
+  hideProgress,
+  showMessage,
 } from "./utils/common.js";
 
 const postViewModelMap = new Map();
@@ -96,13 +99,20 @@ const attachEventListeners = () => {
       return;
     }
     const passcodeTxt = document.getElementById("passcode");
-    const response = await postJoinRequest(passcodeTxt.value);
-    if (response.status === 401) {
-      showMessage("Wrong passcode");
-    } else if (!response.ok) {
+    showProgress("Checking passcode...");
+    try {
+      const response = await postJoinRequest(passcodeTxt.value);
+      if (response.status === 401) {
+        showMessage("Wrong passcode");
+      } else if (!response.ok) {
+        showMessage("Something went wrong");
+      } else if (response.ok) {
+        location.reload();
+      }
+    } catch (err) {
       showMessage("Something went wrong");
-    } else if (response.ok) {
-      location.reload();
+    } finally {
+      hideProgress();
     }
   });
 };

@@ -72,6 +72,8 @@ const attachCommonEventListeners = () => {
       } else {
         showMessage("Failed to create your post");
       }
+    } catch (err) {
+      showMessage("Something went wrong");
     } finally {
       hideProgress();
     }
